@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const ErrorPage = () => {
   return (
@@ -13,12 +14,13 @@ const ErrorPage = () => {
             Sorry, we couldn’t find the page you’re looking for.
           </p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a
-              href="#"
+            <Link to='/'
+              
+              
               class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Go back home
-            </a>
+            </Link>
             
           </div>
         </div>

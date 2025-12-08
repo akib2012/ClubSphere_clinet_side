@@ -5,11 +5,13 @@ import useAuth from "../../Hook/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import useGoogolelogin from "../../Hook/useGoogolelogin";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Registation = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { singupuser, updateprofile } = useAuth();
+  const { singupuser, updateprofile, user } = useAuth();
   const handlegooglelogin = useGoogolelogin();
+  const axiossecure = useAxiosSecure();
 
   const {
     register,
@@ -46,6 +48,18 @@ const Registation = () => {
 
             updateprofile(updateprofiledata)
               .then(() => {
+                const userinfo = {
+                  name: user.displayName,
+                  email: user.email,
+                  photo: user.photoURL,
+                };
+                axiossecure.post("/users", userinfo).then((res) => {
+                  if (res.data.insertedId) {
+                    console.log("user created in the database");
+                  }
+                  
+                });
+
                 // console.log("profile update done !!");
                 toast.success("you singup succesfull !!");
               })
@@ -55,13 +69,12 @@ const Registation = () => {
           })
           .catch((error) => console.log(error));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+         toast.error("something went wrong !!");
+
+      });
   };
-
-
-  /* const handlegoolelogin = () => {
-    useGoogolelogin()
-  } */
 
   return (
     <div>
@@ -220,7 +233,10 @@ const Registation = () => {
           </div>
 
           {/* Google Login */}
-          <button onClick={  handlegooglelogin} className="w-full border border-gray-700 text-gray-200 py-3 rounded-lg flex justify-center items-center gap-2 hover:bg-gray-700 transition">
+          <button
+            onClick={handlegooglelogin}
+            className="w-full border border-gray-700 text-gray-200 py-3 rounded-lg flex justify-center items-center gap-2 hover:bg-gray-700 transition"
+          >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
               className="w-5"

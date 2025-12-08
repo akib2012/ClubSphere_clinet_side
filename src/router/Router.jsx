@@ -27,6 +27,7 @@ const router = createBrowserRouter([
                 element: <Registation></Registation>,
             },
             
+            
         ]
     },
 ])
