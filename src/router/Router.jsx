@@ -10,6 +10,9 @@ import DeshboardLayout from "../Layout/DeshboardLayout";
 import CreateClub from "../Pages/Deshboardpages/CreateClub";
 import CreateClubForm from "../Pages/Deshboardpages/CreateClubForm";
 import Clubs from "../Pages/Navbarpages/Clubs";
+import ManageClub from "../Pages/Deshboardpages/ManageClub";
+import AdminRouter from "./AdminRoute";
+import UserManagement from "../Pages/Deshboardpages/UserManagement";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +46,16 @@ const router = createBrowserRouter([
       {
         path:"/deshboard/manager/create-club",
         element:<CreateClubForm />
-      }
+      },
+      {
+        path: '/deshboard/admin/manageuser',
+        element: <UserManagement></UserManagement>,
+      },
+      {
+        path: '/deshboard/admin/manageclub',
+        element: <ManageClub></ManageClub>
+      },
+
     ],
   },
 ]);

@@ -8,7 +8,7 @@ const Clubs = () => {
   const { data: clubs = [] } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/clubs");
+      const res = await axiosSecure.get("/clubs/approved");
       return res.data;
     },
   });
