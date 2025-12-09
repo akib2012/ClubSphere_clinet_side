@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import ThemeToggle from "../../theme/themetogol";
 import useAuth from "../../Hook/useAuth";
-import logo from '../../assets/logo.png'
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logoutuser } = useAuth();
@@ -99,13 +99,12 @@ const Navbar = () => {
                   <p className="text-gray-500 text-xs mt-1">{user?.email}</p>
 
                   {/* Mobile logout button (inside dropdown) */}
-                  
-                  <button
-                    onClick={() => logoutuser()}
-                    className="btn bg-[#0092b8] text-white rounded-xl w-full my-2 "
-                  >
-                    Deshboard
-                  </button>
+
+                  <Link to="/deshboard">
+                    <button className="btn bg-[#0092b8] text-white rounded-xl w-full my-2">
+                      Dashboard
+                    </button>
+                  </Link>
                   <button
                     onClick={() => logoutuser()}
                     className="btn bg-[#0092b8] text-white rounded-xl w-full my-2 "
