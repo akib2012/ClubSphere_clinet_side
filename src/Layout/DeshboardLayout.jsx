@@ -4,6 +4,8 @@ import { IoIosCreate } from "react-icons/io";
 import useRole from "../router/useRole";
 import { FaUser } from "react-icons/fa";
 import { MdManageHistory } from "react-icons/md";
+import { MdCreateNewFolder } from "react-icons/md";
+
 
 const DeshboardLayout = () => {
   const { role } = useRole();
@@ -38,9 +40,7 @@ const DeshboardLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4 font-bold text-xl text-ore">
-              ClubSphere
-            </div>
+            <div className="px-4 font-bold text-xl text-ore">ClubSphere</div>
           </nav>
           {/* Page content here */}
           <div className="p-4">
@@ -88,9 +88,7 @@ const DeshboardLayout = () => {
                 <button
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Settings"
-                >
-                  
-                </button>
+                ></button>
 
                 <Link to="/deshboard/manager/create-club">
                   <button
@@ -101,6 +99,23 @@ const DeshboardLayout = () => {
                     <IoIosCreate className="w-6 h-6" />
                     <span className="is-drawer-close:hidden">
                       create a club
+                    </span>
+                  </button>
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/deshboard/manager/create-event">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="create a event"
+                  >
+                    {/* create club icoon */}
+                    {/* <IoIosCreate className="w-6 h-6" /> */}
+                    
+                    <MdCreateNewFolder className="w-6 h-6"/>
+                    <span className="is-drawer-close:hidden">
+                      create a event
                     </span>
                   </button>
                 </Link>
@@ -128,7 +143,7 @@ const DeshboardLayout = () => {
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip=" manage clubs"
                       >
-                        <MdManageHistory  className="w-6 h-6"/>
+                        <MdManageHistory className="w-6 h-6" />
                         <span className="is-drawer-close:hidden">
                           mange clubs
                         </span>

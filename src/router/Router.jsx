@@ -13,6 +13,7 @@ import Clubs from "../Pages/Navbarpages/Clubs";
 import ManageClub from "../Pages/Deshboardpages/ManageClub";
 import AdminRouter from "./AdminRoute";
 import UserManagement from "../Pages/Deshboardpages/UserManagement";
+import CreateEvent from "../Pages/Deshboardpages/CreateEvent";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,11 @@ const router = createBrowserRouter([
       {
         path:"/deshboard/manager/create-club",
         element:<CreateClubForm />
+      },
+      {
+        path: '/deshboard/manager/create-event',
+        element: <CreateEvent></CreateEvent>,
+
       },
       {
         path: '/deshboard/admin/manageuser',
