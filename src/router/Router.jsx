@@ -14,6 +14,10 @@ import ManageClub from "../Pages/Deshboardpages/ManageClub";
 import AdminRouter from "./AdminRoute";
 import UserManagement from "../Pages/Deshboardpages/UserManagement";
 import CreateEvent from "../Pages/Deshboardpages/CreateEvent";
+import ClubDetails from "../Pages/Navbarpages/ClubDetails";
+import ClubMembership from "../Pages/Deshboardpages/Club/ClubMembership";
+import MyClubs from "../Pages/Deshboardpages/Club/MyClubs";
+import EditClub from "../Pages/Deshboardpages/Club/EditClub";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +30,18 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "regester", element: <Registation /> },
       {
-        path: '/Clubs',
-        element: <Clubs></Clubs>
-      }
+        path: "/Clubs",
+        element: <Clubs></Clubs>,
+      },
+      {
+        path: "/clubs/:id",
+        element: <ClubDetails />,
+      },
+      {
+        path: "/clubs/:id/membership",
+        element: <ClubMembership />,
+      },
+     
     ],
   },
 
@@ -45,23 +58,26 @@ const router = createBrowserRouter([
         element: <CreateClub />,
       },
       {
-        path:"/deshboard/manager/create-club",
-        element:<CreateClubForm />
+        path: "/deshboard/manager/create-club",
+        element: <CreateClubForm />,
       },
       {
-        path: '/deshboard/manager/create-event',
+        path: "/deshboard/manager/create-event",
         element: <CreateEvent></CreateEvent>,
-
       },
       {
-        path: '/deshboard/admin/manageuser',
+        path: "/deshboard/admin/manageuser",
         element: <UserManagement></UserManagement>,
       },
       {
-        path: '/deshboard/admin/manageclub',
-        element: <ManageClub></ManageClub>
+        path: "/deshboard/admin/manageclub",
+        element: <ManageClub></ManageClub>,
       },
-
+      {
+        path: '/deshboard/manager/my-clubs',
+        element: <MyClubs></MyClubs>,
+      },
+      
     ],
   },
 ]);

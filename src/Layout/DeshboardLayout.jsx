@@ -5,6 +5,7 @@ import useRole from "../router/useRole";
 import { FaUser } from "react-icons/fa";
 import { MdManageHistory } from "react-icons/md";
 import { MdCreateNewFolder } from "react-icons/md";
+import { BsCollectionFill } from "react-icons/bs";
 
 
 const DeshboardLayout = () => {
@@ -114,6 +115,27 @@ const DeshboardLayout = () => {
                     {/* <IoIosCreate className="w-6 h-6" /> */}
                     
                     <MdCreateNewFolder className="w-6 h-6"/>
+                    <span className="is-drawer-close:hidden">
+                      create a event
+                    </span>
+                  </button>
+                </Link>
+              </li>
+
+              {/* my clubs */}
+
+              <li>
+                <Link to="/deshboard/manager/my-clubs">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="create a event"
+                  >
+                    {/* create club icoon */}
+                    {/* <IoIosCreate className="w-6 h-6" /> */}
+                    
+                   
+                  <BsCollectionFill  className="w-6 h-6"/>
+
                     <span className="is-drawer-close:hidden">
                       create a event
                     </span>
