@@ -157,7 +157,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        <button className="btn btn-primary w-full">Create Event</button>
+        <button className="btn bg-orange-600 text-white font-semibold w-full">Create Event</button>
       </form>
     </div>
   );

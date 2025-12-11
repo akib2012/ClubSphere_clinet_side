@@ -118,8 +118,16 @@ const handleDelete = async (id) => {
   // console.log(myclubs);
 
   return (
-    <div className="p-4">
+    <div className="my-4">
       <h2 className="text-2xl font-bold mb-4">My Clubs</h2>
+
+      <Link to="/deshboard/manager/create-club">
+        <div className="mt-4">
+          <button className="btn bg-orange-600 text-white font-bold">
+            Create New Club
+          </button>
+        </div>
+      </Link>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
@@ -190,13 +198,7 @@ const handleDelete = async (id) => {
         </table>
       </div>
 
-      <Link to="/deshboard/manager/create-club">
-        <div className="mt-4">
-          <button className="btn bg-orange-600 text-white font-bold">
-            Create New Club
-          </button>
-        </div>
-      </Link>
+      
 
       {/* club modal here */}
 

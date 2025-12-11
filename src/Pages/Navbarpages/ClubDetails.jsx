@@ -65,7 +65,7 @@ const ClubDetails = () => {
           </div>
         </div>
 
-        {/* ✅ Join Club Section */}
+       
         <div className="bg-base-100 rounded-2xl shadow-md p-6 h-fit sticky top-24">
           <h3 className="text-xl font-bold mb-2">Join This Club</h3>
           <p className="text-sm text-gray-500 mb-4">

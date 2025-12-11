@@ -6,7 +6,7 @@ const JoinButton = ({ club, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  console.log(club);
+  console.log(club.managerEmail);
 
   const handleJoin = async () => {
     const membershipInfo = {
@@ -14,19 +14,13 @@ const JoinButton = ({ club, refetch }) => {
       clubId: club._id,
       status: club.membershipFee === 0 ? "active" : "pendingPayment",
       joinedAt: new Date().toISOString().split("T")[0],
-
-
-
-
-
+      manageremail: club.managerEmail,
     };
 
     try {
       const res = await axiosSecure.post("/memberships", membershipInfo);
-      
 
       if (res.data.membershipId) {
-        
         toast.success(
           club.membershipFee === 0
             ? "Membership activated 🎉"

@@ -196,7 +196,7 @@ const CreateClubForm = () => {
         </div>
 
         {/* Submit Button */}
-        <button className="btn btn-primary w-full mt-2 text-lg lg:text-xl py-2 lg:py-3">
+        <button className="btn bg-orange-600 text-white font-semibold  w-full mt-2 text-lg lg:text-xl py-2 lg:py-3">
           Create Club
         </button>
       </form>

@@ -19,6 +19,8 @@ import ClubMembership from "../Pages/Deshboardpages/Club/ClubMembership";
 import MyClubs from "../Pages/Deshboardpages/Club/MyClubs";
 import EditClub from "../Pages/Deshboardpages/Club/EditClub";
 import Events from "../Pages/Navbarpages/Events";
+import ClubMembersPanel from "../Pages/Deshboardpages/Club/ClubMembersPanel";
+import EventMangement from "../Pages/Deshboardpages/Event/EventMangement";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +85,15 @@ const router = createBrowserRouter([
         path: '/deshboard/manager/my-clubs',
         element: <MyClubs></MyClubs>,
       },
+      {
+        path: '/deshboard/manager/ClubMembersPanel',
+        element: <ClubMembersPanel></ClubMembersPanel>
+        
+      },
+      {
+        path: '/deshboard/manager/event-mangemnet',
+        element: <EventMangement></EventMangement>
+      }
       
     ],
   },
