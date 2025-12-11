@@ -18,6 +18,7 @@ import ClubDetails from "../Pages/Navbarpages/ClubDetails";
 import ClubMembership from "../Pages/Deshboardpages/Club/ClubMembership";
 import MyClubs from "../Pages/Deshboardpages/Club/MyClubs";
 import EditClub from "../Pages/Deshboardpages/Club/EditClub";
+import Events from "../Pages/Navbarpages/Events";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
         path: "/clubs/:id/membership",
         element: <ClubMembership />,
       },
+      {
+        path: '/Events',
+        element: <Events></Events>
+       
+      }
      
     ],
   },

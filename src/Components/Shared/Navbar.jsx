@@ -60,9 +60,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <div className="mr-3.5">
-            <ThemeToggle></ThemeToggle>
-          </div>
+          
 
           {user ? (
             <div className="relative ">
@@ -98,7 +96,7 @@ const Navbar = () => {
                   <p className="font-semibold">{user?.displayName}</p>
                   <p className="text-gray-500 text-xs mt-1">{user?.email}</p>
 
-                  {/* Mobile logout button (inside dropdown) */}
+                 
 
                   <Link to="/deshboard">
                     <button className="btn bg-[#0092b8] text-white rounded-xl w-full my-2">

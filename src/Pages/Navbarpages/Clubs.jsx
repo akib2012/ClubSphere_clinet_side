@@ -23,6 +23,8 @@ const Clubs = () => {
 
   return (
     <div>
+
+      
       <div className="flex items-center gap-3 mb-4">
         <FiTag className="text-2xl text-primary" />
         <h2 className="text-2xl font-bold">Club List</h2>
