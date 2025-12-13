@@ -8,7 +8,7 @@ import { MdCreateNewFolder } from "react-icons/md";
 import { BsCollectionFill } from "react-icons/bs";
 import { MdGroups2 } from "react-icons/md";
 import { FiCalendar } from "react-icons/fi";
-
+import { FaRegIdBadge } from "react-icons/fa6";
 
 const DeshboardLayout = () => {
   const { role } = useRole();
@@ -115,8 +115,8 @@ const DeshboardLayout = () => {
                   >
                     {/* create club icoon */}
                     {/* <IoIosCreate className="w-6 h-6" /> */}
-                    
-                    <MdCreateNewFolder className="w-6 h-6"/>
+
+                    <MdCreateNewFolder className="w-6 h-6" />
                     <span className="is-drawer-close:hidden">
                       create a event
                     </span>
@@ -134,13 +134,10 @@ const DeshboardLayout = () => {
                   >
                     {/* create club icoon */}
                     {/* <IoIosCreate className="w-6 h-6" /> */}
-                    
-                   
-                  <BsCollectionFill  className="w-6 h-6"/>
 
-                    <span className="is-drawer-close:hidden">
-                      My Clubs
-                    </span>
+                    <BsCollectionFill className="w-6 h-6" />
+
+                    <span className="is-drawer-close:hidden">My Clubs</span>
                   </button>
                 </Link>
               </li>
@@ -151,10 +148,9 @@ const DeshboardLayout = () => {
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="ClubMembersPanel"
                   >
-                    <MdGroups2 className="w-6 h-6"/>
-                    
-                   
-                  {/* <BsCollectionFill  /> */}
+                    <MdGroups2 className="w-6 h-6" />
+
+                    {/* <BsCollectionFill  /> */}
 
                     <span className="is-drawer-close:hidden">
                       ClubMembersPanel
@@ -163,17 +159,16 @@ const DeshboardLayout = () => {
                 </Link>
               </li>
 
-               <li>
+              <li>
                 <Link to="/deshboard/manager/event-mangemnet">
                   <button
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="event managemnet"
                   >
                     {/* <MdGroups2 className="w-6 h-6"/> */}
-                    <FiCalendar className="w-6 h-6"/>
-                    
-                   
-                  {/* <BsCollectionFill  /> */}
+                    <FiCalendar className="w-6 h-6" />
+
+                    {/* <BsCollectionFill  /> */}
 
                     <span className="is-drawer-close:hidden">
                       event managemnet
@@ -182,6 +177,24 @@ const DeshboardLayout = () => {
                 </Link>
               </li>
 
+              <li>
+                <Link to="/deshboard/manager/event-registrations">
+                  <button
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="event-registrations"
+                  >
+                    {/* <MdGroups2 className="w-6 h-6"/> */}
+                    {/* <FiCalendar className="w-6 h-6" /> */}
+                    <FaRegIdBadge className="w-6 h-6"/>
+
+                    {/* <BsCollectionFill  /> */}
+
+                    <span className="is-drawer-close:hidden">
+                     event-registrations
+                    </span>
+                  </button>
+                </Link>
+              </li>
 
               {role === "admin" && (
                 <>

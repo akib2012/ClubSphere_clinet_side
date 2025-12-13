@@ -21,6 +21,9 @@ import EditClub from "../Pages/Deshboardpages/Club/EditClub";
 import Events from "../Pages/Navbarpages/Events";
 import ClubMembersPanel from "../Pages/Deshboardpages/Club/ClubMembersPanel";
 import EventMangement from "../Pages/Deshboardpages/Event/EventMangement";
+import EventDetails from "../Pages/Navbarpages/EventDetails";
+import EventRegestation from "../Pages/Deshboardpages/Event/EventRegestation";
+import SuccessPayment from "../Pages/Deshboardpages/Payment/SuccessPayment";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +33,8 @@ const router = createBrowserRouter([
     hydrateFallbackElement: <Loadingspinner />,
     children: [
       { index: true, element: <Home /> },
-      { path: "login", element: <Login /> },
-      { path: "regester", element: <Registation /> },
+      { path: "/login", element: <Login /> },
+      { path: "/regester", element: <Registation /> },
       {
         path: "/Clubs",
         element: <Clubs></Clubs>,
@@ -48,6 +51,16 @@ const router = createBrowserRouter([
         path: '/Events',
         element: <Events></Events>
        
+      }
+      ,
+      {
+        path: '/events/:id',
+        element: <EventDetails></EventDetails>
+
+      },
+      {
+        path: '/payment-success',
+        element: <SuccessPayment></SuccessPayment>
       }
      
     ],
@@ -93,7 +106,13 @@ const router = createBrowserRouter([
       {
         path: '/deshboard/manager/event-mangemnet',
         element: <EventMangement></EventMangement>
+      },
+      {
+        path: '/deshboard/manager/event-registrations',
+        element: <EventRegestation></EventRegestation>
+
       }
+
       
     ],
   },

@@ -12,7 +12,7 @@ const MyClubs = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedClub, setSelectedClub] = useState(null);
 
-  const { data: myclubs = [], refetch } = useQuery({
+  const { data: myclubs = [], refetch,isLoading } = useQuery({
     queryKey: ["myclubs"],
     queryFn: async () => {
       const res = await axiosSecure.get("/myclubs");
@@ -116,6 +116,10 @@ const handleDelete = async (id) => {
   } = useForm()
 
   // console.log(myclubs);
+
+  if(isLoading){
+    return <Loadingspinner></Loadingspinner>;
+  }
 
   return (
     <div className="my-4">

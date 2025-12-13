@@ -24,7 +24,7 @@ const WhyJoin = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-50 to-purple-50">
+    <section className="py-20 ">
       <div className="max-w-7xl mx-auto px-6 text-center">
         
         {/* Heading */}

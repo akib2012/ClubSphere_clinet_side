@@ -4,7 +4,7 @@ import React from "react";
 const Intro = () => {
   return (
     <div>
-      <section className="w-full bg-gradient-to-b from-white to-blue-50 py-20">
+      <section className="w-full bg-gradient-to-b from-white to-blue-50 py-20 my-4 rounded-2xl">
         <div className="max-w-7xl mx-auto px-6 text-center">
          
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">

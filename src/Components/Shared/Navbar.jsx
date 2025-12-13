@@ -50,18 +50,18 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <div>
-            <img src={logo} alt="" className="w-10 h-10 rounded-full" />
-          </div>
-          <a className="btn btn-ghost text-xl">ClubSphere</a>
+          <Link to='/'>
+            <div className="flex justify-center items-center gap-1">
+              <img src={logo} alt="" className="w-10 h-10 rounded-full" />
+              <a className="btn btn-ghost text-xl">ClubSphere</a>
+            </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
 
         <div className="navbar-end">
-          
-
           {user ? (
             <div className="relative ">
               <div className="flex items-center gap-5">
@@ -95,8 +95,6 @@ const Navbar = () => {
                 >
                   <p className="font-semibold">{user?.displayName}</p>
                   <p className="text-gray-500 text-xs mt-1">{user?.email}</p>
-
-                 
 
                   <Link to="/deshboard">
                     <button className="btn bg-[#0092b8] text-white rounded-xl w-full my-2">

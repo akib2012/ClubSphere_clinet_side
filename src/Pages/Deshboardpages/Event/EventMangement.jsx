@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import Loadingspinner from "../../../Components/Shared/Loadingspinner";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const EventMangement = () => {
   const axiosSecure = useAxiosSecure();
@@ -53,10 +54,26 @@ const EventMangement = () => {
   const handleeventdelete = async (id) => {
     const res = await axiosSecure.delete(`/events/${id}`);
     console.log(res.data);
-    if(res.data.deletedCount){
-        toast.success('event delte sucessfll!!');
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (res.data.deletedCount) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
         refetch();
-    }
+      }
+    });
   };
 
   return (

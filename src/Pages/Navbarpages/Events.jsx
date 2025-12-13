@@ -12,10 +12,16 @@ const Events = () => {
   const { data: events = [], isLoading } = useQuery({
     queryKey: ["events"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/Events"); // added await
+      const res = await axiosSecure.get("/Events"); 
       return res.data;
     },
   });
+
+
+
+
+
+
 
   if (isLoading) return <Loadingspinner></Loadingspinner>;
 

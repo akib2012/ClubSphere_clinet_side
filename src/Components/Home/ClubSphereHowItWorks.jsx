@@ -1,5 +1,6 @@
 import React from "react";
 import { FiUsers, FiCalendar, FiMessageCircle, FiCheckCircle } from "react-icons/fi";
+import { Link } from "react-router";
 
 export default function ClubSphereHowItWorks({ className = "" }) {
   const steps = [
@@ -31,7 +32,7 @@ export default function ClubSphereHowItWorks({ className = "" }) {
 
   return (
     <section
-      className={`w-full mx-auto p-12 bg-gradient-to-br from-[#c9f6ff] to-[#ffe4cc]  shadow-xl text-slate-900 ${className}`}
+      className={`w-full mx-auto p-12 bg-gradient-to-b from-blue-50 to-purple-50 rounded-2xl mb-5 shadow-2xl text-slate-900 ${className}`}
       aria-labelledby="how-it-works"
     >
       {/* HEADER */}
@@ -50,11 +51,11 @@ export default function ClubSphereHowItWorks({ className = "" }) {
           </p>
         </div>
 
-        <a
+        <Link to='/regester'
           className="inline-flex items-center px-5 py-3 bg-[#0092b8] text-white rounded-xl text-sm font-semibold shadow hover:bg-[#007a99] transition"
         >
           Get Started
-        </a>
+        </Link>
       </div>
 
       {/* STEPS */}
@@ -72,9 +73,9 @@ export default function ClubSphereHowItWorks({ className = "" }) {
 
               {/* TEXT */}
               <div className="flex-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-slate-900">{s.title}</h3>
-                  <span className="text-xs text-slate-500 font-medium">Step {s.id}</span>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900">{s.title}</h3> 
+                  <span className="text-xs text-orange-500 font-medium">Step {s.id}</span>
                 </div>
 
                 <p className="mt-2 text-sm text-slate-700 leading-relaxed">{s.desc}</p>
@@ -92,11 +93,11 @@ export default function ClubSphereHowItWorks({ className = "" }) {
       </ol>
 
       {/* FOOTER TIP */}
-      <footer className="mt-10 text-xs text-slate-700">
+      {/* <footer className="mt-10 text-xs text-slate-700">
         <p>
           Tip: Use ClubSphere’s calendar integrations to sync events instantly for all members.
         </p>
-      </footer>
+      </footer> */}
     </section>
   );
 }

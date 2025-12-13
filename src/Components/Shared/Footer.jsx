@@ -1,16 +1,20 @@
 import React from "react";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
     <div>
       <footer className="footer footer-horizontal footer-center bg-base-300 text-base-content rounded p-10">
-        <div className="flex justify-center items-center gap-2">
-          <div>
-            <img src={logo} alt="" className="w-10 h-10 rounded-full" />
+        <Link to='/'>
+          <div className="flex justify-center items-center gap-2">
+            <div>
+              <img src={logo} alt="" className="w-10 h-10 rounded-full" />
+            </div>
+            <a className="btn btn-ghost text-xl">ClubSphere</a>
           </div>
-          <a className="btn btn-ghost text-xl">ClubSphere</a>
-        </div>
+        </Link>
+
         <nav className="grid grid-flow-col gap-4">
           <a className="link link-hover">About us</a>
           <a className="link link-hover">Contact</a>
