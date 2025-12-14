@@ -9,6 +9,7 @@ import { BsCollectionFill } from "react-icons/bs";
 import { MdGroups2 } from "react-icons/md";
 import { FiCalendar } from "react-icons/fi";
 import { FaRegIdBadge } from "react-icons/fa6";
+import { MdMapsHomeWork } from "react-icons/md";
 
 const DeshboardLayout = () => {
   const { role } = useRole();
@@ -96,6 +97,21 @@ const DeshboardLayout = () => {
               {role === "manager" && (
                 <>
                   <li>
+                    <Link to="/deshboard">
+                      <button
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Admin Overview"
+                      >
+                        {/* <IoIosCreate className="w-6 h-6" /> */}
+                        <MdMapsHomeWork className="w-6 h-6" />
+                        <span className="is-drawer-close:hidden">
+                          Admin Overview
+                        </span>
+                      </button>
+                    </Link>
+                  </li>
+
+                  <li>
                     <Link to="/deshboard/manager/create-club">
                       <button
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -182,6 +198,20 @@ const DeshboardLayout = () => {
               {role === "admin" && (
                 <>
                   <li>
+                    <Link to="/deshboard">
+                      <button
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Admin Overview"
+                      >
+                        {/* <IoIosCreate className="w-6 h-6" /> */}
+                        <MdMapsHomeWork className="w-6 h-6" />
+                        <span className="is-drawer-close:hidden">
+                          Admin Overview
+                        </span>
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/deshboard/admin/manageuser">
                       <button
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -213,6 +243,20 @@ const DeshboardLayout = () => {
 
               {role === "member" && (
                 <>
+                  <li>
+                    <Link to="/deshboard">
+                      <button
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Admin Overview"
+                      >
+                        {/* <IoIosCreate className="w-6 h-6" /> */}
+                        <MdMapsHomeWork className="w-6 h-6" />
+                        <span className="is-drawer-close:hidden">
+                          Admin Overview
+                        </span>
+                      </button>
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       to="/deshboard/member/my-club"
