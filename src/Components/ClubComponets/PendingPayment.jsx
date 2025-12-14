@@ -15,12 +15,12 @@ const PendingPayment = ({club}) => {
             bannerImage: club.bannerImage,
             description: club.description,
             clubName: club.clubName,
-            quantity: '1',
+            quantity: 1,
 
 
         }
 
-        const result  =await axiosSecure.post('/create-checkout-session', paymentInfo)
+        const result = await axiosSecure.post('/create-checkout-session', paymentInfo)
         console.log(result.data.url);
         window.location.href = result.data.url;
     

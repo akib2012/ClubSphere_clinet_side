@@ -11,6 +11,8 @@ const JoinButton = ({ club, refetch }) => {
   const handleJoin = async () => {
     const membershipInfo = {
       userEmail: user.email,
+      clubname:club.clubName,
+      location: club.location,
       clubId: club._id,
       status: club.membershipFee === 0 ? "active" : "pendingPayment",
       joinedAt: new Date().toISOString().split("T")[0],
@@ -33,13 +35,10 @@ const JoinButton = ({ club, refetch }) => {
     }
   };
 
-
-
   return (
     <button
       onClick={handleJoin}
       className="btn bg-orange-600 hover:bg-orange-700 text-white w-full"
-      
     >
       Join Membership
     </button>
