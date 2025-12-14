@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiCalendar, FiMapPin, FiDollarSign, FiUsers } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import useAuth from "../../Hook/useAuth";
 import { toast } from "react-toastify";
-import { useQuery } from "@tanstack/react-query";
 
 const CreateEvent = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [selectedClub, setSelectedClub] = useState("Choose a club");
 
-  const [selectedClub, setSelectedClub] = useState("choose a club");
-
+  
   const { data: clubs = [] } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
@@ -20,33 +19,25 @@ const CreateEvent = () => {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
 
   const onSubmit = async (data) => {
-
-    console.log(data);
     try {
-      const res = await axiosSecure.post("/events", {
+      const payload = {
         ...data,
         isPaid: data.isPaid || false,
         eventFee: data.isPaid ? Number(data.eventFee) : 0,
         maxAttendees: data.maxAttendees ? Number(data.maxAttendees) : null,
         createdAt: new Date(),
         createdBy: user?.email,
-          
+      };
 
-      });
+      const res = await axiosSecure.post("/events", payload);
 
       if (res.data) {
         toast.success("Event created successfully!");
         reset();
-        setSelectedClub("choose a club");
+        setSelectedClub("Choose a club");
       }
     } catch (err) {
       console.error(err);
@@ -54,17 +45,12 @@ const CreateEvent = () => {
     }
   };
 
-  
-
   return (
     <div className="w-full max-w-md lg:max-w-3xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-6">
-      <h2 className="text-xl lg:text-3xl font-bold text-center">
-        Create New Event
-      </h2>
+      <h2 className="text-xl lg:text-3xl font-bold text-center">Create New Event</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
-        {/* event title */}
+        {/* Event Title */}
         <div className="form-control">
           <label className="label font-semibold">Event Title</label>
           <input
@@ -74,7 +60,7 @@ const CreateEvent = () => {
           {errors.title && <p className="text-red-500">{errors.title.message}</p>}
         </div>
 
-        {/* date */}
+        {/* Event Date */}
         <div className="form-control">
           <label className="label font-semibold">Event Date</label>
           <input
@@ -84,7 +70,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        {/* dropdown for club */}
+        {/* Club Dropdown */}
         <div>
           <details className="dropdown">
             <summary className="btn w-full text-left">{selectedClub}</summary>
@@ -94,7 +80,8 @@ const CreateEvent = () => {
                   <a
                     onClick={() => {
                       setSelectedClub(club.clubName);
-                      setValue("clubId", club._id); 
+                      setValue("clubId", club._id); // store club id
+                      setValue("clubName", club.clubName); // optional: store club name
                     }}
                   >
                     {club.clubName}
@@ -104,18 +91,14 @@ const CreateEvent = () => {
             </ul>
           </details>
 
-          {/* hidden field for react-hook-form */}
-          <input
-            type="hidden"
-            {...register("clubId", { required: true })}
-          />
+          {/* Hidden fields for form submission */}
+          <input type="hidden" {...register("clubId", { required: true })} />
+          <input type="hidden" {...register("clubName")} />
 
-          {errors.clubId && (
-            <p className="text-red-500 text-sm">Please select a club</p>
-          )}
+          {errors.clubId && <p className="text-red-500 text-sm">Please select a club</p>}
         </div>
 
-        {/* location */}
+        {/* Location */}
         <div className="form-control">
           <label className="label font-semibold">Location</label>
           <input
@@ -124,7 +107,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        {/* paid toggle */}
+        {/* Paid toggle */}
         <div className="form-control">
           <label className="label cursor-pointer gap-3">
             <span className="font-semibold">Is this a paid event?</span>
@@ -136,7 +119,7 @@ const CreateEvent = () => {
           </label>
         </div>
 
-        {/* fee */}
+        {/* Event Fee */}
         <div className="form-control">
           <label className="label font-semibold">Event Fee</label>
           <input
@@ -147,7 +130,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        {/* description */}
+        {/* Description */}
         <div className="form-control">
           <label className="label font-semibold">Description</label>
           <textarea
@@ -157,7 +140,9 @@ const CreateEvent = () => {
           />
         </div>
 
-        <button className="btn bg-orange-600 text-white font-semibold w-full">Create Event</button>
+        <button className="btn bg-orange-600 text-white font-semibold w-full">
+          Create Event
+        </button>
       </form>
     </div>
   );

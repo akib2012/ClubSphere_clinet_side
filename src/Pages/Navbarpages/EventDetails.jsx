@@ -24,6 +24,7 @@ const EventDetails = () => {
     },
   });
 
+
    
   const { data: registration, refetch: refetchRegistration } = useQuery({
     queryKey: ["userEventRegistration", id, user?.email],
@@ -35,6 +36,9 @@ const EventDetails = () => {
       return res.data;
     },
   });
+
+
+  console.log(event);
 
   
   
@@ -50,6 +54,10 @@ const EventDetails = () => {
       paymentID: event?.paymentID || "free",
       regeesteredat: bdTime,
       eventWoner: event.createdBy,
+      eventtitle: event.title,
+      clubname: event.clubName,
+      eventDate: event.eventDate,
+
     };
 
     try {

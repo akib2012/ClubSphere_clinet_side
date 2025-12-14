@@ -7,7 +7,7 @@ import Registation from "../Pages/Authpage/Registation";
 import Loadingspinner from "../Components/Shared/Loadingspinner";
 import PrivateRoute from "./PrivateRoute";
 import DeshboardLayout from "../Layout/DeshboardLayout";
-import CreateClub from "../Pages/Deshboardpages/CreateClub";
+import CreateClub from "../Pages/Deshboardpages/Deshboardmain";
 import CreateClubForm from "../Pages/Deshboardpages/CreateClubForm";
 import Clubs from "../Pages/Navbarpages/Clubs";
 import ManageClub from "../Pages/Deshboardpages/ManageClub";
@@ -26,6 +26,7 @@ import EventRegestation from "../Pages/Deshboardpages/Event/EventRegestation";
 import SuccessPayment from "../Pages/Deshboardpages/Payment/SuccessPayment";
 import MemberClubs from "../Pages/Deshboardpages/Club/MemberClubs";
 import MembershipEvent from "../Pages/Deshboardpages/Event/MembershipEvent";
+import Deshboardmain from "../Pages/Deshboardpages/Deshboardmain";
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <CreateClub />,
+        element: <Deshboardmain></Deshboardmain>,
       },
       {
         path: "/deshboard/manager/create-club",

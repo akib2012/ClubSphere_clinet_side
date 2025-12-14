@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 // import img from '../../assets/pet03.jpg'
 
 const Intro = () => {
@@ -23,19 +24,19 @@ const Intro = () => {
 
           {/* Buttons */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              /* href="/clubs" */
+            <Link to='/Clubs'
+              
               className="px-8 py-4 bg-[#0092b8] text-white rounded-xl shadow hover:bg-blue-700 transition duration-300"
             >
               Join a Club
-            </a>
+            </Link>
 
-            <a
-              /* href="/dashboard/manager/create-club" */
+            <Link to='/Events'
+              
               className="px-8 py-4 text-orange-600 bg-white border border-gray-300 rounded-xl shadow hover:bg-gray-100 transition duration-300"
             >
-              Create a Club
-            </a>
+              Grab Your Seat!
+            </Link>
           </div>
 
           {/* Optional Image */}
