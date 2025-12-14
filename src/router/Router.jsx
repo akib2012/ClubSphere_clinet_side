@@ -27,6 +27,8 @@ import SuccessPayment from "../Pages/Deshboardpages/Payment/SuccessPayment";
 import MemberClubs from "../Pages/Deshboardpages/Club/MemberClubs";
 import MembershipEvent from "../Pages/Deshboardpages/Event/MembershipEvent";
 import Deshboardmain from "../Pages/Deshboardpages/Deshboardmain";
+import Adminpaymenttable from "../Pages/Deshboardpages/Payment/Adminpaymenttable";
+import Memberpaymnets from "../Pages/Deshboardpages/Payment/Memberpaymnets";
 
 const router = createBrowserRouter([
   {
@@ -51,22 +53,17 @@ const router = createBrowserRouter([
         element: <ClubMembership />,
       },
       {
-        path: '/Events',
-        element: <Events></Events>
-       
-      }
-      ,
-      {
-        path: '/events/:id',
-        element: <EventDetails></EventDetails>
-
+        path: "/Events",
+        element: <Events></Events>,
       },
       {
-        path: '/payment-success',
-        element: <SuccessPayment></SuccessPayment>
+        path: "/events/:id",
+        element: <EventDetails></EventDetails>,
       },
-      
-     
+      {
+        path: "/payment-success",
+        element: <SuccessPayment></SuccessPayment>,
+      },
     ],
   },
 
@@ -99,33 +96,37 @@ const router = createBrowserRouter([
         element: <ManageClub></ManageClub>,
       },
       {
-        path: '/deshboard/manager/my-clubs',
+        path: "/deshboard/manager/my-clubs",
         element: <MyClubs></MyClubs>,
       },
       {
-        path: '/deshboard/manager/ClubMembersPanel',
-        element: <ClubMembersPanel></ClubMembersPanel>
-        
+        path: "/deshboard/manager/ClubMembersPanel",
+        element: <ClubMembersPanel></ClubMembersPanel>,
       },
       {
-        path: '/deshboard/manager/event-mangemnet',
-        element: <EventMangement></EventMangement>
+        path: "/deshboard/manager/event-mangemnet",
+        element: <EventMangement></EventMangement>,
       },
       {
-        path: '/deshboard/manager/event-registrations',
-        element: <EventRegestation></EventRegestation>
-
+        path: "/deshboard/manager/event-registrations",
+        element: <EventRegestation></EventRegestation>,
       },
       {
-        path: '/deshboard/member/my-club',
-        element: <MemberClubs></MemberClubs>
+        path: "/deshboard/member/my-club",
+        element: <MemberClubs></MemberClubs>,
       },
       {
-        path: '/deshboard/member/my-events',
-        element: <MembershipEvent></MembershipEvent>
-      }
-
-      
+        path: "/deshboard/member/my-events",
+        element: <MembershipEvent></MembershipEvent>,
+      },
+      {
+        path: "/deshboard/admin/Transactions",
+        element: <Adminpaymenttable></Adminpaymenttable>,
+      },
+      {
+        path: "/deshboard/member/transaction",
+        element: <Memberpaymnets></Memberpaymnets>,
+      },
     ],
   },
 ]);

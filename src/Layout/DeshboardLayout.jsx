@@ -10,6 +10,7 @@ import { MdGroups2 } from "react-icons/md";
 import { FiCalendar } from "react-icons/fi";
 import { FaRegIdBadge } from "react-icons/fa6";
 import { MdMapsHomeWork } from "react-icons/md";
+import { MdAttachMoney } from "react-icons/md";
 
 const DeshboardLayout = () => {
   const { role } = useRole();
@@ -238,6 +239,20 @@ const DeshboardLayout = () => {
                       </button>
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/deshboard/admin/Transactions">
+                      <button
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Transactions"
+                      >
+                        {/* <MdManageHistory className="w-6 h-6" /> */}
+                        <MdAttachMoney className="w-6 h-6" />
+                        <span className="is-drawer-close:hidden">
+                          Transactions
+                        </span>
+                      </button>
+                    </Link>
+                  </li>
                 </>
               )}
 
@@ -276,6 +291,19 @@ const DeshboardLayout = () => {
                     >
                       <FiCalendar className="w-6 h-6" />
                       <span className="is-drawer-close:hidden">My Events</span>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      to="/deshboard/member/transaction"
+                      className="btn btn-ghost justify-start is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="transaction history"
+                    >
+                      {/* <FiCalendar className="w-6 h-6" />
+                       */}
+                       <MdAttachMoney className="w-6 h-6"/>
+                      <span className="is-drawer-close:hidden">transaction history</span>
                     </Link>
                   </li>
                 </>
