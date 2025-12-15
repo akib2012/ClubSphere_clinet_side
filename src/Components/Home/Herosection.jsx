@@ -1,125 +1,98 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Typewriter } from 'react-simple-typewriter'
-import pet1 from "../../assets/pet1.jpg";
-import pet2 from "../../assets/pet02.webp";
-import pet3 from "../../assets/pet03.jpg";
+import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import Loadingspinner from "../Shared/Loadingspinner";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
-const Herosection = () => {
+const HeroSection = () => {
+  const axiosSecure = useAxiosSecure();
+  const { data: clubs = [], isLoading } = useQuery({
+    queryKey: ["approvedClubs"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/approved-clubs");
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loadingspinner></Loadingspinner>;
+  }
+
   return (
     <div className="mt-5">
       <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
+        autoPlay
+        infiniteLoop
         interval={3000}
         showThumbs={false}
         showStatus={false}
-        stopOnHover={false}
       >
-        <div className="relative ">
-          <img className="h-[480px] object-cover rounded-2xl" src={pet1} />
-          <div className="absolute bottom-40 md:bottom-50 left-1/2 transform -translate-x-1/2 text-center text-black px-4 space-y-4">
-            <h1 className="text-4xl font-bold">
-              Welcome to HobbyHub
-              <br />
-              <span className="text-indigo-600">
-                <Typewriter
-                  words={[
-                    "Explore Groups",
-                    "Join Communities",
-                    "Find Your Passion",
-                  ]}
-                  loop={true}
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
-                />
-              </span>
-            </h1>
-            <p className="font-medium max-w-xl mx-auto">
-              Hobbies are generally not done for profit, but for personal
-              enjoyment and satisfaction.
-            </p>
-            <Link>
-              <button className="btn bg-cyan-600 text-white rounded-2xl px-6 py-2">
-                Explore Hobbies
-              </button>
-            </Link>
+        {clubs.map((club) => (
+          <div key={club._id} className="relative">
+            <img
+              src={club.bannerImage}
+              className="h-[300px] sm:h-[380px] lg:h-[480px] w-full object-cover rounded-2xl"
+              alt={club.clubName}
+            />
+
+            <div
+              className="
+    absolute 
+    bottom-6 sm:bottom-12 lg:bottom-32
+    left-1/2 -translate-x-1/2
+    text-center
+    px-4 sm:px-6
+    space-y-3 sm:space-y-4
+    bg-white/70 backdrop-blur-md
+    rounded-2xl
+    p-4 sm:p-6
+    max-w-[90%] sm:max-w-xl
+  "
+            >
+              <h1 className="text-2xl sm:text-xl lg:text-4xl font-bold leading-tight">
+                {club.clubName}
+                <br />
+                <span className="text-indigo-600 block mt-1">
+                  <Typewriter
+                    words={[
+                      "Find Active Clubs",
+                      "Become a Member",
+                      "Participate in Events",
+                    ]}
+                    loop
+                    cursor
+                  />
+                </span>
+              </h1>
+
+              <p className="text-sm sm:text-base text-gray-700 max-w-lg mx-auto">
+                {club.description?.slice(0, 120)}...
+              </p>
+
+              <Link to={`/clubs/${club._id}`}>
+                <button
+                  className="
+        btn
+        bg-cyan-600 hover:bg-cyan-700
+        text-white
+        rounded-2xl
+        px-5 sm:px-6
+        py-2
+        text-sm sm:text-base
+      "
+                >
+                  Explore Club
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="relative">
-          <img className="h-[480px] object-cover rounded-2xl" src={pet2} />
-          <div className="absolute bottom-40 md:bottom-50 left-1/2 transform -translate-x-1/2 text-center text-black px-4 space-y-4">
-            <h1 className="text-4xl font-bold">
-              Welcome to HobbyHub
-              <br />
-              <span className="text-indigo-600">
-                <Typewriter
-                  words={[
-                    "Explore Groups",
-                    "Join Communities",
-                    "Find Your Passion",
-                  ]}
-                  loop={true}
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
-                />
-              </span>
-            </h1>
-            <p className="font-medium max-w-xl mx-auto">
-              Hobbies are generally not done for profit, but for personal
-              enjoyment and satisfaction.
-            </p>
-            <Link>
-              <button className="btn bg-cyan-600 text-white rounded-2xl px-6 py-2">
-                Explore Hobbies
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className="relative">
-          <img className="h-[480px] object-cover rounded-2xl" src={pet3} />
-          <div className="absolute bottom-40 md:bottom-50  left-1/2 transform -translate-x-1/2 text-center text-black px-4 space-y-4">
-            <h1 className="text-4xl font-bold">
-              Welcome to HobbyHub
-              <br />
-              <span className="text-indigo-600">
-                <Typewriter
-                  words={[
-                    "Explore Groups",
-                    "Join Communities",
-                    "Find Your Passion",
-                  ]}
-                  loop={true}
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={1000}
-                />
-              </span>
-            </h1>
-            <p className="font-medium max-w-xl mx-auto">
-              Hobbies are generally not done for profit, but for personal
-              enjoyment and satisfaction.
-            </p>
-            <Link>
-              <button className="btn bg-cyan-600 text-white rounded-2xl px-6 py-2">
-                Explore Hobbies
-              </button>
-            </Link>
-          </div>
-        </div>
+        ))}
       </Carousel>
     </div>
   );
 };
 
-export default Herosection;
+export default HeroSection;

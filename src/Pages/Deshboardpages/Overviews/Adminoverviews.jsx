@@ -109,7 +109,7 @@ const Adminoverviews = () => {
         />
         <StatCard
           title="Total Membership"
-          value={`$${data?.memberships || 0}`}
+          value={`${data?.memberships || 0}`}
           icon={MdCardMembership}
           iconColor="text-orange-600"
         />

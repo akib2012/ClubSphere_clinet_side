@@ -51,13 +51,13 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to='/'>
-            <div className="flex justify-center items-center gap-1">
+            <div className="flex justify-center items-center gap-1 ml-2 ">
               <img src={logo} alt="" className="w-10 h-10 rounded-full" />
               <a className="btn btn-ghost text-xl">ClubSphere</a>
             </div>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex ml-2">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
 
@@ -91,7 +91,7 @@ const Navbar = () => {
               {open && (
                 <div
                   className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-4 z-50
-                 text-gray-700 text-sm animate-fadeIn"
+                 text-gray-700 text-sm animate-fadeIn ml-2"
                 >
                   <p className="font-semibold">{user?.displayName}</p>
                   <p className="text-gray-500 text-xs mt-1">{user?.email}</p>
