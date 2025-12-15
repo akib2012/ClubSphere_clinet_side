@@ -81,7 +81,7 @@ const Clubs = () => {
         </select>
       </div>
 
-      {isFetching && <p className="text-sm text-gray-400 mb-3">Loading clubs...</p>}
+      {isFetching && <Loadingspinner></Loadingspinner>}
 
       {/* Clubs Grid */}
       {clubsToDisplay.length === 0 ? (
