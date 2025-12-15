@@ -136,7 +136,7 @@ const CreateClubForm = () => {
             <input
               type="text"
               className="input input-bordered w-full"
-              placeholder="e.g. New York, USA"
+              placeholder="e.g.dhaka bangladesh "
               {...register("location", { required: "Location is required" })}
             />
             {errors.location && (

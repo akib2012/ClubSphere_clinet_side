@@ -43,7 +43,7 @@ const MyClubs = () => {
       imageUrl = imgData.data.url;
     }
 
-    // ✅ Updated data object
+ 
     const updateClubInfo = {
       clubName: data.clubName,
       description: data.description,
@@ -54,7 +54,7 @@ const MyClubs = () => {
       updatedAt: new Date(),
     };
 
-    // ✅ PATCH request
+     
     const res = await axiosSecure.patch(
       `/clubs/${selectedClub._id}`,
       updateClubInfo

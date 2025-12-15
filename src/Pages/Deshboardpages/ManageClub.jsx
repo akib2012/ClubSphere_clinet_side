@@ -69,7 +69,7 @@ const ManageClub = () => {
               <td>{club.clubName}</td>
               <td>{club.managerEmail}</td>
               <td>{club.status}</td>
-              <td>free</td>
+              <td>{club.membershipFee || "free"}</td>
               <td className="flex gap-2">
                 {(club.status === "aproved" || club.status === "rejected") ? (
                   <button className="btn btn-sm btn-info">View Stats</button>
