@@ -29,6 +29,7 @@ import MembershipEvent from "../Pages/Deshboardpages/Event/MembershipEvent";
 import Deshboardmain from "../Pages/Deshboardpages/Deshboardmain";
 import Adminpaymenttable from "../Pages/Deshboardpages/Payment/Adminpaymenttable";
 import Memberpaymnets from "../Pages/Deshboardpages/Payment/Memberpaymnets";
+import Profile from "../Pages/Deshboardpages/Userprofile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ const router = createBrowserRouter([
         path: "/deshboard/member/transaction",
         element: <Memberpaymnets></Memberpaymnets>,
       },
+      {
+        path: '/deshboard/profile',
+        element: <Profile></Profile>
+      }
     ],
   },
 ]);

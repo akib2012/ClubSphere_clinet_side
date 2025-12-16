@@ -51,8 +51,7 @@ const Registation = () => {
                   email: firebaseUser.email,
                   photo: updateprofiledata.photoURL,
                 };
-                //http://localhost:3000/users"
-                // Send to backend without JWT (new user)
+               
                 try {
                   const res = await axiosSecure.post('/users', userinfo)
                   if (res.data.insertedId) {

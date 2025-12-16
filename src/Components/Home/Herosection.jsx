@@ -17,9 +17,7 @@ const HeroSection = () => {
     },
   });
 
-  if (isLoading) {
-    return <Loadingspinner></Loadingspinner>;
-  }
+  if (isLoading) return <Loadingspinner />;
 
   return (
     <div className="mt-5">
@@ -40,22 +38,22 @@ const HeroSection = () => {
 
             <div
               className="
-    absolute 
-    bottom-6 sm:bottom-12 lg:bottom-32
-    left-1/2 -translate-x-1/2
-    text-center
-    px-4 sm:px-6
-    space-y-3 sm:space-y-4
-    bg-white/70 backdrop-blur-md
-    rounded-2xl
-    p-4 sm:p-6
-    max-w-[90%] sm:max-w-xl
-  "
+                absolute
+                bottom-4 sm:bottom-8 md:bottom-16 lg:bottom-32
+                left-1/2 -translate-x-1/2
+                text-center
+                bg-white/80 backdrop-blur-md
+                rounded-2xl
+                p-3 sm:p-5 md:p-6
+                w-[90%] sm:w-[80%] md:w-[60%] lg:w-[40%]
+                mx-auto
+                space-y-2 sm:space-y-4
+              "
             >
-              <h1 className="text-2xl sm:text-xl lg:text-4xl font-bold leading-tight">
+              <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-tight">
                 {club.clubName}
                 <br />
-                <span className="text-indigo-600 block mt-1">
+                <span className="text-indigo-600 block mt-1 text-sm sm:text-base md:text-lg">
                   <Typewriter
                     words={[
                       "Find Active Clubs",
@@ -68,21 +66,22 @@ const HeroSection = () => {
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-base text-gray-700 max-w-lg mx-auto">
+              <p className="text-xs sm:text-sm md:text-base text-gray-700 mx-auto">
                 {club.description?.slice(0, 120)}...
               </p>
 
               <Link to={`/clubs/${club._id}`}>
                 <button
                   className="
-        btn
-        bg-cyan-600 hover:bg-cyan-700
-        text-white
-        rounded-2xl
-        px-5 sm:px-6
-        py-2
-        text-sm sm:text-base
-      "
+                    btn
+                    bg-cyan-600 hover:bg-cyan-700
+                    text-white
+                    rounded-2xl
+                    px-4 sm:px-6
+                    py-2 sm:py-3
+                    text-xs sm:text-sm md:text-base
+                    w-full
+                  "
                 >
                   Explore Club
                 </button>

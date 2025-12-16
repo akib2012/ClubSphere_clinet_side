@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FiDollarSign, FiMapPin, FiTag, FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router";
 import Loadingspinner from "../../Components/Shared/Loadingspinner";
+import { motion } from "framer-motion";
 
 const Clubs = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,13 +14,11 @@ const Clubs = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [category, setCategory] = useState("");
 
-
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 400);
     return () => clearTimeout(timer);
   }, [search]);
 
-  //approved
   const { data: initialClubs = [], isLoading: loadingInitial } = useQuery({
     queryKey: ["clubs", "initial"],
     queryFn: async () => {
@@ -28,11 +27,11 @@ const Clubs = () => {
     },
   });
 
-  // Search + Filter
   const { data: filteredClubs = [], isFetching } = useQuery({
     queryKey: ["filterclubs", debouncedSearch, category],
     queryFn: async () => {
       if (!debouncedSearch && !category) return initialClubs;
+
       const res = await axiosSecure.get("/club/search", {
         params: { search: debouncedSearch, category },
       });
@@ -41,19 +40,20 @@ const Clubs = () => {
     keepPreviousData: true,
   });
 
-  const clubsToDisplay = filteredClubs.length ? filteredClubs : initialClubs;
+  const clubsToDisplay =
+    filteredClubs.length > 0 ? filteredClubs : initialClubs;
 
   if (loadingInitial) return <Loadingspinner />;
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
-      {/* Header */}
+      {/* ================= HEADER ================= */}
       <div className="flex items-center gap-3 mb-6">
         <FiTag className="text-2xl text-primary" />
         <h2 className="text-2xl font-bold">Explore Clubs</h2>
       </div>
 
-      {/* Search & Filter */}
+      {/* ================= SEARCH & FILTER ================= */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="relative flex-1">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -81,51 +81,74 @@ const Clubs = () => {
         </select>
       </div>
 
-      {isFetching && <Loadingspinner></Loadingspinner>}
+      {isFetching && <Loadingspinner />}
 
-      {/* Clubs Grid */}
+      {/* ================= CLUBS GRID ================= */}
       {clubsToDisplay.length === 0 ? (
         <p className="text-center text-gray-500">No clubs found.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {clubsToDisplay.map((club) => (
-            <div
+            <motion.div
               key={club._id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              whileHover={{
+                y: -8,
+                boxShadow: "0px 15px 35px rgba(0,0,0,0.15)",
+              }}
               className="card bg-white shadow-lg rounded-2xl overflow-hidden border"
             >
-              <figure className="h-48">
+              {/* IMAGE */}
+              <motion.figure
+                className="h-48 overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
                 <img
                   src={club.bannerImage}
                   alt={club.clubName}
                   className="w-full h-full object-cover"
                 />
-              </figure>
+              </motion.figure>
 
+              {/* BODY */}
               <div className="card-body space-y-2">
                 <h2 className="card-title">{club.clubName}</h2>
-                <p className="text-sm text-gray-600">{club.description?.slice(0, 90)}...</p>
+
+                <p className="text-sm text-gray-600">
+                  {club.description?.slice(0, 90)}...
+                </p>
 
                 <div className="flex justify-between text-sm">
                   <span className="flex items-center gap-1">
                     <FiMapPin /> {club.location}
                   </span>
                   <span className="flex items-center gap-1 font-semibold">
-                    <FiDollarSign /> {club.membershipFee === 0 ? "Free" : `$${club.membershipFee}`}
+                    <FiDollarSign />{" "}
+                    {club.membershipFee === 0
+                      ? "Free"
+                      : `$${club.membershipFee}`}
                   </span>
                 </div>
 
-                <span className="badge bg-orange-600 text-white w-fit">{club.category}</span>
+                <span className="badge bg-orange-600 text-white w-fit">
+                  {club.category}
+                </span>
 
                 <div className="card-actions justify-end">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => navigate(`/clubs/${club._id}`)}
                     className="btn btn-outline btn-primary btn-sm rounded-xl"
                   >
                     View Details
-                  </button>
+                  </motion.button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
