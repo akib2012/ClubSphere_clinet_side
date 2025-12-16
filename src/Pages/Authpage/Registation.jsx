@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../Hook/useAuth";
 import axios from "axios";
 import { toast } from "react-toastify";
 import useGoogolelogin from "../../Hook/useGoogolelogin";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Registation = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { singupuser, updateprofile } = useAuth();
   const handlegooglelogin = useGoogolelogin();
+  const navigate  = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -48,16 +51,15 @@ const Registation = () => {
                   email: firebaseUser.email,
                   photo: updateprofiledata.photoURL,
                 };
-
+                //http://localhost:3000/users"
                 // Send to backend without JWT (new user)
                 try {
-                  const res = await axios.post(
-                    "http://localhost:3000/users",
-                    userinfo
-                  );
+                  const res = await axiosSecure.post('/users', userinfo)
                   if (res.data.insertedId) {
-                    console.log("User created in the database");
+                    // console.log("User created in the database");
+                    navigate('/');
                     toast.success("Signup successful!");
+                    
                   } else if (res.data.message === "user exists") {
                     toast.info("User already exists in database");
                   }

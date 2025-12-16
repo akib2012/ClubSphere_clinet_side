@@ -94,9 +94,7 @@ const Clubmangeroverviews = () => {
           <h2 className="text-lg font-semibold text-gray-800 mb-4">
             Membership Growth
           </h2>
-          <div className="flex-1 h-64 sm:h-80 md:h-96">
-            <AdminChart />
-          </div>
+          
         </div>
 
         {/* Optional Recent Activity */}

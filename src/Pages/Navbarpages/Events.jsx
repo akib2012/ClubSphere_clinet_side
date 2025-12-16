@@ -33,7 +33,7 @@ const Events = () => {
   if (isLoading) return <Loadingspinner />;
 
   return (
-    <div className="px-4 md:px-8 lg:px-16">
+    <div className="px-4 md:px-8 lg:px-16 mb-5">
         <h2 className="text-2xl font-bold">Explore Events</h2>
       {/* Search */}
       <div className="flex flex-col md:flex-row items-center gap-4 mt-6">
