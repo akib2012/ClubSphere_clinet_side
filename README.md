@@ -1,16 +1,250 @@
-# React + Vite
+ClubSphere – Membership & Event Management for Local Clubs
+Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ClubSphere is a full‑stack MERN web application designed to help users discover, join, and manage local clubs with ease. The platform supports club memberships, event management, and secure online payments, all within a modern and responsive interface.
 
-Currently, two official plugins are available:
+The system features role‑based dashboards for Admins, Club Managers, and Members, integrates Stripe for payments, and uses modern React tools such as React Hook Form and TanStack Query for efficient data handling.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Core Features
+Member Features
 
-## React Compiler
+Browse clubs and events
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Join clubs (free or paid memberships)
 
-## Expanding the ESLint configuration
+View and manage active memberships
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Register for club events
+
+View upcoming events from joined clubs
+
+Club Manager Features
+
+Create and manage club profiles
+
+Set and update membership fees
+
+Create, edit, and manage events
+
+View club members and event registrations
+
+Admin Features
+
+Approve or reject club submissions
+
+Promote or demote users to Club Manager
+
+Monitor all payments and platform activity
+
+Access role‑based dashboards with summary cards and charts
+
+Additional Features
+
+Firebase Authentication (Email/Password + Google Sign‑In)
+
+JWT‑based protected routes
+
+Search, filter, and sort clubs and events
+
+Fully responsive design (mobile, tablet, desktop)
+
+Smooth animations using Framer Motion
+
+Efficient data fetching with TanStack Query
+
+Stripe test payment integration
+
+Technology Stack
+Frontend
+
+React.js
+
+React Router
+
+Tailwind CSS & DaisyUI
+
+React Hook Form
+
+TanStack Query
+
+Framer Motion
+
+React Icons
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB
+
+Firebase Admin (JWT Verification)
+
+Stripe API
+
+Database Design (Collections)
+users
+
+name, email, photoURL
+
+role (admin | clubManager | member)
+
+createdAt
+
+clubs
+
+clubName, description, category, location
+
+bannerImage, membershipFee
+
+status (pending | approved | rejected)
+
+managerEmail (FK → users)
+
+createdAt, updatedAt
+
+memberships
+
+userEmail, clubId
+
+status (active | expired | pendingPayment)
+
+paymentId
+
+joinedAt, expiresAt (optional)
+
+events
+
+clubId, title, description
+
+eventDate, location
+
+isPaid, eventFee
+
+maxAttendees (optional)
+
+createdAt
+
+eventRegistrations
+
+eventId, userEmail, clubId
+
+status (registered | cancelled)
+
+paymentId (optional)
+
+registeredAt
+
+payments
+
+userEmail, amount
+
+type (membership | event)
+
+clubId, eventId (if applicable)
+
+stripePaymentIntentId / transactionId
+
+status, createdAt
+
+Pages & Routing
+Public Pages
+
+/ – Home
+
+/clubs – Clubs Listing
+
+/clubs/:id – Club Details
+
+/events – Events Listing
+
+/events/:id – Event Details
+
+/login – Login Page
+
+/register – Register Page
+
+Optional: /pricing, /how-it-works, 404
+
+Dashboard Pages (Role‑Based)
+
+Admin: Overview, Users, Clubs, Payments
+
+Club Manager: Overview, My Clubs, Members, Events
+
+Member: Overview, My Clubs, My Events, Payment History
+
+Installation & Setup
+Environment
+PORT=3000
+Install Dependencies
+Server
+cd server
+npm install
+Client
+cd client
+npm install
+Run Locally
+Server
+npm run dev
+Client
+npm start
+Deployment
+
+
+
+Testing Accounts
+Admin
+
+Email: admin100@gmail.com
+
+Password: Admin@1234
+
+Club Manager
+
+Email: manager100@gmail.com
+
+Password: Manager@11234
+
+Important NPM Packages
+
+express, cors, mongodb
+
+firebase-admin
+
+stripe
+
+react, react-dom, react-router-dom
+
+tailwindcss, daisyui
+
+react-hook-form
+
+@tanstack/react-query
+
+framer-motion
+
+react-icons
+
+Key Highlights
+
+Role‑based dashboards
+
+Secure Firebase JWT authentication
+
+Stripe payment integration
+
+Dynamic club & event search, filter, and sorting
+
+Modern, responsive UI
+
+Smooth animations and enhanced UX
+
+Live Project & Source Code
+
+Live Site: [Insert Live URL]
+
+Client Repository: [Insert Client Repo URL]
+
+Server Repository: [Insert Server Repo URL]
