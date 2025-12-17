@@ -194,20 +194,8 @@ Deployment
 
 
 
-Testing Accounts
-Admin
-
-Email: admin100@gmail.com
-
-Password: Admin@1234
-
-Club Manager
-
-Email: manager100@gmail.com
-
-Password: Manager@11234
-
 Important NPM Packages
+
 
 express, cors, mongodb
 
@@ -241,10 +229,34 @@ Modern, responsive UI
 
 Smooth animations and enhanced UX
 
-Live Project & Source Code
+
+
+
+Testing Accounts
+
+Admin:
+
+Email: admin100@gmail.com
+
+Password: Admin@1234
+
+Club Manager:
+
+Email: manager100@gmail.com
+
+Password: Manager@11234
+
+
+
+Live Project & Source Code: 
+
 
 Live Site: [Insert Live URL]
 
 Client Repository: [Insert Client Repo URL]
 
 Server Repository: [Insert Server Repo URL]
+
+
+
+**Developed by:** MD Perbej Bhuiyan Akib
