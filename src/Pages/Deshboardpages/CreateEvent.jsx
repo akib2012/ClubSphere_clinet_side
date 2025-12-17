@@ -80,8 +80,8 @@ const CreateEvent = () => {
                   <a
                     onClick={() => {
                       setSelectedClub(club.clubName);
-                      setValue("clubId", club._id); // store club id
-                      setValue("clubName", club.clubName); // optional: store club name
+                      setValue("clubId", club._id); 
+                      setValue("clubName", club.clubName); 
                     }}
                   >
                     {club.clubName}
@@ -91,7 +91,7 @@ const CreateEvent = () => {
             </ul>
           </details>
 
-          {/* Hidden fields for form submission */}
+        
           <input type="hidden" {...register("clubId", { required: true })} />
           <input type="hidden" {...register("clubName")} />
 
@@ -107,7 +107,7 @@ const CreateEvent = () => {
           />
         </div>
 
-        {/* Paid toggle */}
+       
         <div className="form-control">
           <label className="label cursor-pointer gap-3">
             <span className="font-semibold">Is this a paid event?</span>

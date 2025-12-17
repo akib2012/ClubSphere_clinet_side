@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import Loadingspinner from "../../Components/Shared/Loadingspinner";
-// import JoinClubSection from "../Deshboardpages/JoinClubSection";
 
 const ClubDetails = () => {
   const { id } = useParams();
@@ -18,13 +18,23 @@ const ClubDetails = () => {
   });
 
   if (isLoading) {
-    return <Loadingspinner></Loadingspinner>;
+    return <Loadingspinner />;
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* ✅ Banner */}
-      <div className="relative h-56 sm:h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg">
+    <motion.div
+      className="max-w-6xl mx-auto px-4 py-8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
+      {/*  Banner */}
+      <motion.div
+        className="relative h-56 sm:h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg"
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <img
           src={club.bannerImage}
           alt={club.clubName}
@@ -35,12 +45,17 @@ const ClubDetails = () => {
             {club.clubName}
           </h2>
         </div>
-      </div>
+      </motion.div>
 
-      {/* ✅ Info + Join Section */}
+      {/*  Info + Join Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-        {/* ✅ Club Info */}
-        <div className="lg:col-span-2 bg-base-100 rounded-2xl shadow-md p-6 md:p-8">
+        {/*  Club Info */}
+        <motion.div
+          className="lg:col-span-2 bg-base-100 rounded-2xl shadow-md p-6 md:p-8"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
           <p className="text-gray-600 text-base md:text-lg leading-relaxed">
             {club.description}
           </p>
@@ -63,27 +78,38 @@ const ClubDetails = () => {
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-       
-        <div className="bg-base-100 rounded-2xl shadow-md p-6 h-fit sticky top-24">
+        {/*  Join Section */}
+        <motion.div
+          className="bg-base-100 rounded-2xl shadow-md p-6 h-fit sticky top-24"
+          initial={{ x: 40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           <h3 className="text-xl font-bold mb-2">Join This Club</h3>
           <p className="text-sm text-gray-500 mb-4">
             Become a member and join exclusive events & activities.
           </p>
 
           <Link to={`/clubs/${club._id}/membership`}>
-            <button className="btn bg-orange-600 text-white w-full">Join Membership</button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn bg-orange-600 text-white w-full"
+            >
+              Join Membership
+            </motion.button>
           </Link>
 
           {club?.alreadyMember && (
             <p className="text-success text-sm mt-3 font-medium">
-              ✅ You are already a member
+               You are already a member
             </p>
           )}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

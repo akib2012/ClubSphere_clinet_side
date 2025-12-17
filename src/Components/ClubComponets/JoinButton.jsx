@@ -1,17 +1,16 @@
 import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const JoinButton = ({ club, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  console.log(club.managerEmail);
-
   const handleJoin = async () => {
     const membershipInfo = {
       userEmail: user.email,
-      clubname:club.clubName,
+      clubname: club.clubName,
       location: club.location,
       clubId: club._id,
       status: club.membershipFee === 0 ? "active" : "pendingPayment",
@@ -36,12 +35,17 @@ const JoinButton = ({ club, refetch }) => {
   };
 
   return (
-    <button
+    <motion.button
       onClick={handleJoin}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
       className="btn bg-orange-600 hover:bg-orange-700 text-white w-full"
     >
       Join Membership
-    </button>
+    </motion.button>
   );
 };
 
