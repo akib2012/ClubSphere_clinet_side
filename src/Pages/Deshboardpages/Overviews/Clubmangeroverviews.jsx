@@ -90,12 +90,7 @@ const Clubmangeroverviews = () => {
 
       {/* Membership Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-        <div className="bg-white rounded-2xl p-6 shadow-sm lg:col-span-2 flex flex-col">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">
-            Membership Growth
-          </h2>
-          
-        </div>
+        
 
         {/* Optional Recent Activity */}
         {/* <div className="bg-white rounded-2xl p-6 shadow-sm">
