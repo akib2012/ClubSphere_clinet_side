@@ -122,7 +122,7 @@ const DashboardLayout = () => {
                   Manager Tools
                 </div>
                 <MenuItem to="/deshboard" icon={MdMapsHomeWork}>
-                  Admin Overview
+                  Manager Overview
                 </MenuItem>
                 <MenuItem
                   to="/deshboard/manager/create-club"

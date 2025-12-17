@@ -80,6 +80,9 @@ const ManageClub = () => {
 
   return (
     <div className="overflow-x-auto">
+
+      <h4 className="text-3xl font-bold my-3"> Manage your Clubs</h4>
+
       <table className="table table-zebra">
         <thead>
           <tr>

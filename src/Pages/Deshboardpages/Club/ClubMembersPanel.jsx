@@ -76,7 +76,10 @@ const ClubMembersPanel = () => {
                       m.status === "active"
                         ? "bg-green-600 hover:bg-orange-700"
                         : "bg-orange-600 hover:bg-red-700"
-                    } text-white btn-sm md:btn-md w-full md:w-auto`}
+                    } text-white
+  w-full sm:w-auto
+  btn-sm sm:btn-md
+  px-4 py-2`}
                   >
                     {m.status === "active" ? "Set Expired" : "Expired"}
                   </button>
@@ -86,8 +89,6 @@ const ClubMembersPanel = () => {
           </tbody>
         </table>
       </div>
-
-      
     </div>
   );
 };

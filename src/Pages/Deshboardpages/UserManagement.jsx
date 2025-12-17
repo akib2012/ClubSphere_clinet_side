@@ -74,7 +74,7 @@ const UserManagement = () => {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold mb-4">
+      <h3 className="text-3xl font-semibold mb-4">
         Total Users: {users.length}
       </h3>
 
@@ -88,7 +88,7 @@ const UserManagement = () => {
               <th>Role</th>
 
               <th>Created At</th>
-              <th>Actions</th>
+              <th>Actions(admin/manager/member)</th>
             </tr>
           </thead>
 

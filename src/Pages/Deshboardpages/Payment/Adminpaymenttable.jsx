@@ -15,7 +15,7 @@ const Adminpaymenttable = () => {
 
   return (
     <div>
-      <h4> payment history</h4>
+      <h4 className="text-3xl font-bold my-3"> payment history</h4>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">

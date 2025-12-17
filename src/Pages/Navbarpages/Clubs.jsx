@@ -13,12 +13,15 @@ const Clubs = () => {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [category, setCategory] = useState("");
+  const [sortOption, setSortOption] = useState("newest");
 
+  // debounce search input
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 400);
     return () => clearTimeout(timer);
   }, [search]);
 
+  // Initial clubs fetch
   const { data: initialClubs = [], isLoading: loadingInitial } = useQuery({
     queryKey: ["clubs", "initial"],
     queryFn: async () => {
@@ -27,13 +30,16 @@ const Clubs = () => {
     },
   });
 
+  // Filtered + Sorted clubs
   const { data: filteredClubs = [], isFetching } = useQuery({
-    queryKey: ["filterclubs", debouncedSearch, category],
+    queryKey: ["filterclubs", debouncedSearch, category, sortOption],
     queryFn: async () => {
-      if (!debouncedSearch && !category) return initialClubs;
-
       const res = await axiosSecure.get("/club/search", {
-        params: { search: debouncedSearch, category },
+        params: {
+          search: debouncedSearch,
+          category,
+          sort: sortOption,
+        },
       });
       return res.data;
     },
@@ -47,14 +53,15 @@ const Clubs = () => {
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
-      {/* ================= HEADER ================= */}
+      {/* HEADER */}
       <div className="flex items-center gap-3 mb-6">
         <FiTag className="text-2xl text-primary" />
         <h2 className="text-2xl font-bold">Explore Clubs</h2>
       </div>
 
-      {/* ================= SEARCH & FILTER ================= */}
+      {/* SEARCH + FILTER + SORT */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
+        {/* Search */}
         <div className="relative flex-1">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -66,6 +73,7 @@ const Clubs = () => {
           />
         </div>
 
+        {/* Category Filter */}
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -79,11 +87,23 @@ const Clubs = () => {
           <option value="Music">Music</option>
           <option value="Gaming">Gaming</option>
         </select>
+
+        {/* Sorting */}
+        <select
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+          className="select select-bordered w-full md:w-56"
+        >
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="highestFee">Highest Fee</option>
+          <option value="lowestFee">Lowest Fee</option>
+        </select>
       </div>
 
       {isFetching && <Loadingspinner />}
 
-      {/* ================= CLUBS GRID ================= */}
+      {/* CLUBS GRID */}
       {clubsToDisplay.length === 0 ? (
         <p className="text-center text-gray-500">No clubs found.</p>
       ) : (
@@ -100,7 +120,6 @@ const Clubs = () => {
               }}
               className="card bg-white shadow-lg rounded-2xl overflow-hidden border"
             >
-              {/* IMAGE */}
               <motion.figure
                 className="h-48 overflow-hidden"
                 whileHover={{ scale: 1.05 }}
@@ -113,7 +132,6 @@ const Clubs = () => {
                 />
               </motion.figure>
 
-              {/* BODY */}
               <div className="card-body space-y-2">
                 <h2 className="card-title">{club.clubName}</h2>
 

@@ -25,7 +25,6 @@ const EventMangement = () => {
     },
   });
 
-  // Autofill React Hook Form when event selected
   React.useEffect(() => {
     if (selectedEvent) {
       setValue("title", selectedEvent.title);
@@ -33,66 +32,57 @@ const EventMangement = () => {
       setValue("description", selectedEvent.description);
       setValue("eventDate", selectedEvent.eventDate);
     }
-  }, [selectedEvent]);
+  }, [selectedEvent, setValue]);
 
-  if (isLoading) return <Loadingspinner></Loadingspinner>;
+  if (isLoading) return <Loadingspinner />;
 
-  // Patch API Submit
   const onSubmit = async (data) => {
-    await axiosSecure
-      .patch(`/events/${selectedEvent._id}`, data)
-      .then((res) => {
-        if (res.data.matchedCount) {
-          toast.success("event update sucessfull!!");
-          refetch();
-        }
-      });
+    const res = await axiosSecure.patch(`/events/${selectedEvent._id}`, data);
+    if (res.data.matchedCount) {
+      toast.success("Event updated successfully!");
+      refetch();
+    }
     reset();
     setSelectedEvent(null);
   };
 
   const handleeventdelete = async (id) => {
     const res = await axiosSecure.delete(`/events/${id}`);
-    console.log(res.data);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      if (result.isConfirmed) {
-        if (res.data.deletedCount) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success",
-          });
-        }
+      if (result.isConfirmed && res.data.deletedCount) {
+        Swal.fire("Deleted!", "Event has been deleted.", "success");
         refetch();
       }
     });
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Event Management</h2>
+    <div className="p-2 md:p-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+        <h2 className="text-2xl font-bold">Event Management</h2>
+        <Link to="/deshboard/manager/create-event">
+          <button className="btn bg-orange-600 text-white w-full sm:w-auto">
+            Create Event
+          </button>
+        </Link>
+      </div>
 
-      <Link to="/deshboard/manager/create-event">
-        <button className="btn bg-orange-600 my-4">Create Event</button>
-      </Link>
-
-      <div className="overflow-x-auto">
+      {/* ---------- Desktop Table ---------- */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="table table-zebra">
           <thead>
             <tr>
               <th>#</th>
-              <th>title</th>
-              <th>location</th>
-              <th>description</th>
-              <th>createdAt</th>
+              <th>Title</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -103,21 +93,20 @@ const EventMangement = () => {
                 <td>{index + 1}</td>
                 <td>{e.title}</td>
                 <td>{e.location}</td>
-                <td>{e.description}</td>
+                <td className="max-w-xs truncate">{e.description}</td>
                 <td>{e.createdAt}</td>
-                <td>
+                <td className="space-x-2">
                   <button
                     onClick={() => setSelectedEvent(e)}
-                    className="btn btn-sm bg-green-600"
+                    className="btn btn-sm bg-green-600 text-white"
                   >
-                    Edit Event
+                    Edit
                   </button>
-
                   <button
                     onClick={() => handleeventdelete(e._id)}
-                    className="btn btn-sm bg-orange-600"
+                    className="btn btn-sm bg-orange-600 text-white"
                   >
-                    Delete Event
+                    Delete
                   </button>
                 </td>
               </tr>
@@ -126,10 +115,44 @@ const EventMangement = () => {
         </table>
       </div>
 
+      {/* ---------- Mobile Cards ---------- */}
+      <div className="md:hidden space-y-4">
+        {events.map((e, index) => (
+          <div
+            key={e._id}
+            className="bg-base-100 rounded-xl shadow p-4 space-y-2"
+          >
+            <p className="text-sm text-gray-500">#{index + 1}</p>
+            <h3 className="font-bold text-lg">{e.title}</h3>
+            <p>
+              <span className="font-semibold">📍</span> {e.location}
+            </p>
+            <p className="text-sm text-gray-600">{e.description}</p>
+            <p className="text-sm">📅 {e.createdAt}</p>
+
+            <div className="flex gap-2 pt-2">
+              <button
+                onClick={() => setSelectedEvent(e)}
+                className="btn btn-sm bg-green-600 text-white flex-1"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleeventdelete(e._id)}
+                className="btn btn-sm bg-orange-600 text-white flex-1"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ---------- Edit Modal ---------- */}
       {selectedEvent && (
-        <dialog open className="modal">
+        <dialog open className="modal modal-bottom sm:modal-middle">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Edit Event</h3>
+            <h3 className="font-bold text-lg mb-2">Edit Event</h3>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
               <input
@@ -137,19 +160,16 @@ const EventMangement = () => {
                 className="input input-bordered w-full"
                 placeholder="Event Title"
               />
-
               <input
                 {...register("location")}
                 className="input input-bordered w-full"
                 placeholder="Location"
               />
-
               <input
                 {...register("eventDate")}
                 className="input input-bordered w-full"
                 placeholder="Event Date"
               />
-
               <textarea
                 {...register("description")}
                 className="textarea textarea-bordered w-full"
