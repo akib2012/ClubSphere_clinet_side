@@ -18,15 +18,17 @@ const EventRegestation = () => {
     },
   });
 
-  if(isLoading){
+  if (isLoading) {
     return <Loadingspinner></Loadingspinner>;
   }
 
   console.log(eventRegistrations);
- 
 
   return (
     <div>
+      <h2 className="text-xl lg:text-3xl font-bold my-5 ">
+          Event Registers
+      </h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           {/* head */}
@@ -39,16 +41,14 @@ const EventRegestation = () => {
             </tr>
           </thead>
           <tbody>
-             
-           {
-            eventRegistrations.map((event, index) =>  <tr>
-              <th>{index + 1}</th>
-              <td>{event.useremail}</td>
-              <td>{event.status}</td>
-              <td>{event.regeesteredat}</td>
-            </tr>)
-           }
-            
+            {eventRegistrations.map((event, index) => (
+              <tr>
+                <th>{index + 1}</th>
+                <td>{event.useremail}</td>
+                <td>{event.status}</td>
+                <td>{event.regeesteredat}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
