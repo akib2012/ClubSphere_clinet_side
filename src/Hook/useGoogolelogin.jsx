@@ -1,12 +1,13 @@
 import { toast } from "react-toastify";
 import useAuth from "./useAuth";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useGoogleLogin = () => {
   const { googellogin } = useAuth();
   const navigate = useNavigate();
   const axiossecure = useAxiosSecure();
+  const location = useLocation();
 
   const handleGoogleLogin = () => {
     googellogin()

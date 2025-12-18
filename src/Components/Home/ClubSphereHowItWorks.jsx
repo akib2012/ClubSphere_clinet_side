@@ -51,7 +51,7 @@ export default function ClubSphereHowItWorks({ className = "" }) {
           </p>
         </div>
 
-        <Link to='/regester'
+        <Link to='/Clubs'
           className="inline-flex items-center px-5 py-3 bg-[#0092b8] text-white rounded-xl text-sm font-semibold shadow hover:bg-[#007a99] transition"
         >
           Get Started

@@ -22,7 +22,7 @@ const Clubs = () => {
   }, [search]);
 
   // Initial clubs fetch
-  const { data: initialClubs = [], isLoading: loadingInitial } = useQuery({
+  const { data: initialClubs = [], isLoading } = useQuery({
     queryKey: ["clubs", "initial"],
     queryFn: async () => {
       const res = await axiosSecure.get("/clubs/approved");
@@ -49,7 +49,7 @@ const Clubs = () => {
   const clubsToDisplay =
     filteredClubs.length > 0 ? filteredClubs : initialClubs;
 
-  if (loadingInitial) return <Loadingspinner />;
+  if (isLoading) return <Loadingspinner />;
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
