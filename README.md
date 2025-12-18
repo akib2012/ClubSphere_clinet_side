@@ -1,61 +1,52 @@
-ClubSphere – Membership & Event Management for Local Clubs
-Project Overview
+🌟 ClubSphere – Membership & Event Management for Local Clubs
+📌 Project Overview
 
-ClubSphere is a full‑stack MERN web application designed to help users discover, join, and manage local clubs with ease. The platform supports club memberships, event management, and secure online payments, all within a modern and responsive interface.
+ClubSphere is a modern full-stack MERN web application that makes it easy to discover, join, and manage local clubs 🎯.
+Users can explore clubs, purchase memberships, register for events, and make secure online payments — all through a clean, responsive, and intuitive interface.
 
-The system features role‑based dashboards for Admins, Club Managers, and Members, integrates Stripe for payments, and uses modern React tools such as React Hook Form and TanStack Query for efficient data handling.
+The platform includes role-based dashboards for Admins, Club Managers, and Members, integrates Stripe for payments 💳, and uses powerful modern React tools like React Hook Form and TanStack Query for efficient data handling.
 
-Core Features
-Member Features
+🚀 Core Features
+👤 Member Features
 
-Browse clubs and events
+🔍 Browse clubs and upcoming events
 
-Join clubs (free or paid memberships)
+🤝 Join clubs with free or paid memberships
 
-View and manage active memberships
+📂 View and manage active memberships
 
-Register for club events
+🎟 Register for club events
 
-View upcoming events from joined clubs
+📅 See upcoming events from joined clubs
 
-Club Manager Features
+🧑‍💼 Club Manager Features
 
-Create and manage club profiles
+🏷 Create and manage club profiles
 
-Set and update membership fees
+💰 Set and update membership fees
 
-Create, edit, and manage events
+🗓 Create, edit, and manage events
 
-View club members and event registrations
+👥 View club members and event registrations
 
-Admin Features
+✨ Additional Features
 
-Approve or reject club submissions
+🔐 Firebase Authentication (Email/Password + Google Sign-In)
 
-Promote or demote users to Club Manager
+🪪 JWT-based protected routes
 
-Monitor all payments and platform activity
+🔎 Search, filter, and sort clubs & events
 
-Access role‑based dashboards with summary cards and charts
+📱 Fully responsive design (mobile, tablet, desktop)
 
-Additional Features
+🎞 Smooth animations using Framer Motion
 
-Firebase Authentication (Email/Password + Google Sign‑In)
+⚡ Efficient data fetching with TanStack Query
 
-JWT‑based protected routes
+💳 Stripe test payment integration
 
-Search, filter, and sort clubs and events
-
-Fully responsive design (mobile, tablet, desktop)
-
-Smooth animations using Framer Motion
-
-Efficient data fetching with TanStack Query
-
-Stripe test payment integration
-
-Technology Stack
-Frontend
+🛠 Technology Stack
+🎨 Frontend
 
 React.js
 
@@ -71,7 +62,7 @@ Framer Motion
 
 React Icons
 
-Backend
+⚙ Backend
 
 Node.js
 
@@ -83,8 +74,8 @@ Firebase Admin (JWT Verification)
 
 Stripe API
 
-Database Design (Collections)
-users
+🗄 Database Design (Collections)
+👥 users
 
 name, email, photoURL
 
@@ -92,7 +83,7 @@ role (admin | clubManager | member)
 
 createdAt
 
-clubs
+🏛 clubs
 
 clubName, description, category, location
 
@@ -104,7 +95,7 @@ managerEmail (FK → users)
 
 createdAt, updatedAt
 
-memberships
+🤝 memberships
 
 userEmail, clubId
 
@@ -114,7 +105,7 @@ paymentId
 
 joinedAt, expiresAt (optional)
 
-events
+🎉 events
 
 clubId, title, description
 
@@ -126,7 +117,7 @@ maxAttendees (optional)
 
 createdAt
 
-eventRegistrations
+📝 eventRegistrations
 
 eventId, userEmail, clubId
 
@@ -136,7 +127,7 @@ paymentId (optional)
 
 registeredAt
 
-payments
+💰 payments
 
 userEmail, amount
 
@@ -148,8 +139,8 @@ stripePaymentIntentId / transactionId
 
 status, createdAt
 
-Pages & Routing
-Public Pages
+🧭 Pages & Routing
+🌐 Public Pages
 
 / – Home
 
@@ -161,13 +152,13 @@ Public Pages
 
 /events/:id – Event Details
 
-/login – Login Page
+/login – Login
 
-/register – Register Page
+/register – Register
 
 Optional: /pricing, /how-it-works, 404
 
-Dashboard Pages (Role‑Based)
+📊 Dashboard Pages (Role-Based)
 
 Admin: Overview, Users, Clubs, Payments
 
@@ -175,27 +166,7 @@ Club Manager: Overview, My Clubs, Members, Events
 
 Member: Overview, My Clubs, My Events, Payment History
 
-Installation & Setup
-Environment
-PORT=3000
-Install Dependencies
-Server
-cd server
-npm install
-Client
-cd client
-npm install
-Run Locally
-Server
-npm run dev
-Client
-npm start
-Deployment
-
-
-
-Important NPM Packages
-
+📚 Important NPM Packages
 
 express, cors, mongodb
 
@@ -215,48 +186,41 @@ framer-motion
 
 react-icons
 
-Key Highlights
+🌟 Key Highlights
 
-Role‑based dashboards
+🔑 Role-based dashboards
 
-Secure Firebase JWT authentication
+🔐 Secure Firebase JWT authentication
 
-Stripe payment integration
+💳 Stripe payment integration
 
-Dynamic club & event search, filter, and sorting
+🔍 Dynamic search, filter & sorting
 
-Modern, responsive UI
+🎨 Modern and responsive UI
 
-Smooth animations and enhanced UX
+✨ Smooth animations and enhanced UX
 
-
-
-
-Testing Accounts
-
-Admin:
+🧪 Testing Accounts
+👑 Admin
 
 Email: admin100@gmail.com
 
 Password: Admin@1234
 
-Club Manager:
+🧑‍💼 Club Manager
 
 Email: manager100@gmail.com
 
 Password: Manager@11234
 
+🔗 Live Project & Source Code
 
+🌐 Live Site: https://musical-flan-487309.netlify.app/
 
-Live Project & Source Code: 
+🖥 Server Repo: https://github.com/akib2012/ClubSphere_server_side.git
 
+💻 Client Repo: https://github.com/akib2012/ClubSphere_clinet_side.git
 
-Live Site: [Insert Live URL]
+👨‍💻 Developed by
 
-Client Repository: [Insert Client Repo URL]
-
-Server Repository: [Insert Server Repo URL]
-
-
-
-**Developed by:** MD Perbej Bhuiyan Akib
+MD Perbej Bhuiyan Akib 🚀
