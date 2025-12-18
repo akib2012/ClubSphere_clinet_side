@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
@@ -10,7 +10,9 @@ const CreateEvent = () => {
   const { user } = useAuth();
   const [selectedClub, setSelectedClub] = useState("Choose a club");
 
-  
+  // 🔹 dropdown ref
+  const dropdownRef = useRef(null);
+
   const { data: clubs = [] } = useQuery({
     queryKey: ["clubs"],
     queryFn: async () => {
@@ -19,7 +21,28 @@ const CreateEvent = () => {
     },
   });
 
-  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  // 🔹 outside click → close dropdown
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        dropdownRef.current.removeAttribute("open");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const onSubmit = async (data) => {
     try {
@@ -27,7 +50,9 @@ const CreateEvent = () => {
         ...data,
         isPaid: data.isPaid || false,
         eventFee: data.isPaid ? Number(data.eventFee) : 0,
-        maxAttendees: data.maxAttendees ? Number(data.maxAttendees) : null,
+        maxAttendees: data.maxAttendees
+          ? Number(data.maxAttendees)
+          : null,
         createdAt: new Date(),
         createdBy: user?.email,
       };
@@ -47,7 +72,9 @@ const CreateEvent = () => {
 
   return (
     <div className="w-full max-w-md lg:max-w-3xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-6">
-      <h2 className="text-xl lg:text-3xl font-bold text-center">Create New Event</h2>
+      <h2 className="text-xl lg:text-3xl font-bold text-center">
+        Create New Event
+      </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Event Title */}
@@ -57,7 +84,9 @@ const CreateEvent = () => {
             className="input input-bordered w-full"
             {...register("title", { required: "Event title is required" })}
           />
-          {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+          {errors.title && (
+            <p className="text-red-500">{errors.title.message}</p>
+          )}
         </div>
 
         {/* Event Date */}
@@ -66,36 +95,48 @@ const CreateEvent = () => {
           <input
             type="date"
             className="input input-bordered w-full"
-            {...register("eventDate", { required: "Event date is required" })}
+            {...register("eventDate", {
+              required: "Event date is required",
+            })}
           />
         </div>
 
-        {/* Club Dropdown */}
+        {/* Club Dropdown (FIXED) */}
         <div>
-          <details className="dropdown">
-            <summary className="btn w-full text-left">{selectedClub}</summary>
-            <ul className="menu dropdown-content bg-base-100 rounded-box w-52 p-2 shadow-lg">
+          <details ref={dropdownRef} className="dropdown w-full">
+            <summary className="btn w-full text-left">
+              {selectedClub}
+            </summary>
+            <ul className="menu dropdown-content bg-base-100 rounded-box w-full p-2 shadow-lg z-10">
               {clubs.map((club) => (
                 <li key={club._id}>
-                  <a
+                  <button
+                    type="button"
                     onClick={() => {
                       setSelectedClub(club.clubName);
-                      setValue("clubId", club._id); 
-                      setValue("clubName", club.clubName); 
+                      setValue("clubId", club._id);
+                      setValue("clubName", club.clubName);
+                      dropdownRef.current.removeAttribute("open"); // 🔹 close on select
                     }}
                   >
                     {club.clubName}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
           </details>
 
-        
-          <input type="hidden" {...register("clubId", { required: true })} />
+          <input
+            type="hidden"
+            {...register("clubId", { required: true })}
+          />
           <input type="hidden" {...register("clubName")} />
 
-          {errors.clubId && <p className="text-red-500 text-sm">Please select a club</p>}
+          {errors.clubId && (
+            <p className="text-red-500 text-sm">
+              Please select a club
+            </p>
+          )}
         </div>
 
         {/* Location */}
@@ -103,14 +144,18 @@ const CreateEvent = () => {
           <label className="label font-semibold">Location</label>
           <input
             className="input input-bordered w-full"
-            {...register("location", { required: "Location is required" })}
+            {...register("location", {
+              required: "Location is required",
+            })}
           />
         </div>
 
-       
+        {/* Paid toggle */}
         <div className="form-control">
           <label className="label cursor-pointer gap-3">
-            <span className="font-semibold">Is this a paid event?</span>
+            <span className="font-semibold">
+              Is this a paid event?
+            </span>
             <input
               type="checkbox"
               className="toggle toggle-primary"
@@ -136,7 +181,9 @@ const CreateEvent = () => {
           <textarea
             rows={3}
             className="textarea textarea-bordered w-full"
-            {...register("description", { required: "Description is required" })}
+            {...register("description", {
+              required: "Description is required",
+            })}
           />
         </div>
 
