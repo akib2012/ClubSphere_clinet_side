@@ -200,6 +200,32 @@ react-icons
 
 ✨ Smooth animations and enhanced UX
 
+ ##  How to Run the Project Locally (Step-by-Step):
+ 1️⃣ Clone the Repositories
+ git clone https://github.com/akib2012/ClubSphere_clinet_side.git
+ git clone https://github.com/akib2012/ClubSphere_server_side.git
+ 2️⃣ Install Dependencies
+npm install
+3️⃣ Environment Variables
+
+Create a .env file in both client and server directories and add:
+
+Client: 
+VITE_API_URL=your_server_url
+VITE_FIREBASE_API_KEY=your_key
+VITE_STRIPE_PUBLISHABLE_KEY=your_key
+server: 
+PORT=5000
+MONGO_URI=your_mongodb_uri
+STRIPE_SECRET_KEY=your_stripe_secret
+FB_SERVICE_KEY=your_firebase_service_key
+
+
+4️⃣ Run the Project
+npm run dev
+ 
+
+
 🧪 Testing Accounts
 👑 Admin
 
