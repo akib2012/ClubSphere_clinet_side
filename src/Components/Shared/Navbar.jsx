@@ -18,6 +18,12 @@ const Navbar = () => {
       <li>
         <NavLink to="/Events">Events</NavLink>
       </li>
+      <li>
+        <NavLink to="/about">About us</NavLink>
+      </li>
+      <li>
+        <NavLink to="/privecy">PrivacyPolicy</NavLink>
+      </li>
     </>
   );
 
@@ -60,6 +66,9 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex ml-2">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
+        {/* <div>
+          <ThemeToggle></ThemeToggle>
+        </div> */}
 
         <div className="navbar-end">
           {user ? (

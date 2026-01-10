@@ -1,61 +1,88 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useGoogleLogin from "../../Hook/useGoogolelogin";
 import useAuth from "../../Hook/useAuth";
 import { toast } from "react-toastify";
- 
 
 const Login = () => {
-     const [showPassword, setShowPassword] = useState(false);
-     const handlegooglelogin = useGoogleLogin();
-     const {loginuser} = useAuth();
-     const location = useLocation();
-     const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handlegooglelogin = useGoogleLogin();
+  const { loginuser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
-     const {
-      register, 
-      handleSubmit,
-      formState: { errors },
-    } 
-    = useForm();
+  const handlelogin = (data) => {
+    console.log(data);
+    loginuser(data.email, data.password)
+      .then(() => {
+        navigate(`${location.state ? location.state : "/"}`);
+        toast.success("Login successful!!");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Something went wrong, please try again!!");
+      });
+  };
 
-    const handlelogin =  (data) => {
-       console.log(data);
-       loginuser(data.email, data.password)
-       .then(()=> {
-        navigate(`${location.state ? location.state : '/'}`);
-        toast.success("login succesfull!!")
-       })
-       .catch(error => {
-        console.log(error)
-        toast.error("somthing went wrong please try again!!")
-       })
-
-
-
+  // Demo credentials
+  const fillDemo = (type) => {
+    if (type === "admin") {
+      setValue("email", "admin100@gmail.com");
+      setValue("password", "Admin@1234");
+    } else if (type === "manager") {
+      setValue("email", "manager100@gmail.com");
+      setValue("password", "Manager@11234");
+    } else if (type === "user") {
+      setValue("email", "user1001@gmail.com");
+      setValue("password", "User@11234");
     }
-
+  };
 
   return (
     <div>
-   
-      <div className=" min-h-screen flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4">
         <div className="bg-gray-800 w-full max-w-md p-8 rounded-2xl shadow-2xl border border-gray-700">
           <h2 className="text-3xl font-bold text-center text-teal-400 mb-2">
             Login to your account
           </h2>
 
           <p className="text-center text-sm text-gray-400 mb-6">
-            Don't have account?
-            <Link to='/regester' className="text-blue-400 hover:underline">
-              {" "}
+            Don't have account?{" "}
+            <Link to="/regester" className="text-blue-400 hover:underline">
               Registration here
             </Link>
           </p>
 
-           
+          {/* ================= DEMO BUTTONS ================= */}
+          <div className="flex flex-col gap-2 mb-6">
+            <button
+              onClick={() => fillDemo("admin")}
+              className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-semibold transition"
+            >
+              Fill Admin Credentials
+            </button>
+            <button
+              onClick={() => fillDemo("manager")}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition"
+            >
+              Fill Club Manager Credentials
+            </button>
+            <button
+              onClick={() => fillDemo("user")}
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition"
+            >
+              Fill General User Credentials
+            </button>
+          </div>
+
           <form onSubmit={handleSubmit(handlelogin)} className="space-y-5">
             {/* Email */}
             <div>
@@ -64,14 +91,12 @@ const Login = () => {
                 type="email"
                 placeholder="Enter email address"
                 className="w-full mt-1 bg-gray-900 border border-gray-700 text-gray-200 px-4 py-3 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
-               
-                {...register('email',{required: true})}
+                {...register("email", { required: true })}
               />
+              {errors.email?.type === "required" && (
+                <p className="text-red-500 text-xs">Email is required</p>
+              )}
             </div>
-            {
-              errors.email?.type === "required" && 
-              <p className="text-red-500 text-xs">email is required</p>
-            }
 
             {/* Password */}
             <div>
@@ -87,12 +112,11 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   className="w-full bg-gray-900 border border-gray-700 text-gray-200 px-4 py-3 rounded-lg focus:ring-2 focus:ring-teal-500 outline-none"
-                  {...register('password', {required: true})}
+                  {...register("password", { required: true })}
                 />
-                {
-                  errors.password?.type === "required" && 
-                  <p className="text-red-500 text-xs">password is required</p>
-                }
+                {errors.password?.type === "required" && (
+                  <p className="text-red-500 text-xs">Password is required</p>
+                )}
 
                 {/* Eye Toggle */}
                 <button
@@ -101,7 +125,6 @@ const Login = () => {
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
                 >
                   {showPassword ? (
-                    /** Eye Closed Icon */
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -117,7 +140,6 @@ const Login = () => {
                       />
                     </svg>
                   ) : (
-                    /** Eye Open Icon */
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -157,12 +179,14 @@ const Login = () => {
           </div>
 
           {/* Google Login */}
-          <button onClick={handlegooglelogin}  className="w-full border border-gray-700 text-gray-200 py-3 rounded-lg flex justify-center items-center gap-2 hover:bg-gray-700 transition">
+          <button
+            onClick={handlegooglelogin}
+            className="w-full border border-gray-700 text-gray-200 py-3 rounded-lg flex justify-center items-center gap-2 hover:bg-gray-700 transition"
+          >
             <img
               src="https://www.svgrepo.com/show/355037/google.svg"
               className="w-5"
               alt="google"
-              
             />
             Login with Google
           </button>

@@ -22,6 +22,7 @@ const WhyJoin = () => {
       icon: <FaCalendarAlt className="w-14 h-14 text-pink-600" />,
     },
   ];
+  
 
   return (
     <section className="py-20 ">

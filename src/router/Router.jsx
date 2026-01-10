@@ -31,6 +31,8 @@ import Adminpaymenttable from "../Pages/Deshboardpages/Payment/Adminpaymenttable
 import Memberpaymnets from "../Pages/Deshboardpages/Payment/Memberpaymnets";
 import Profile from "../Pages/Deshboardpages/Userprofile/Profile";
 import ClubManagerRouter from "./ClubManagerRouter";
+import About from "../Pages/Navbarpages/About";
+import PrivacyPolicy from "../Pages/Navbarpages/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +50,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/clubs/:id",
-        element: <PrivateRoute><ClubDetails /></PrivateRoute>,
+        element: <ClubDetails />,
+      },
+      {
+        path: '/about',
+        element: <About></About>
+
+      },
+      {
+        path: '/privecy',
+        element: <PrivacyPolicy></PrivacyPolicy>
       },
       {
         path: "/clubs/:id/membership",
