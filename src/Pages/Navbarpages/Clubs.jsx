@@ -6,6 +6,37 @@ import { useNavigate } from "react-router";
 import Loadingspinner from "../../Components/Shared/Loadingspinner";
 import { motion } from "framer-motion";
 
+const ITEMS_PER_PAGE = 8;
+
+// 🔹 Motion Variants
+const pageVariant = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.4 } },
+};
+
+const filterVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1 },
+  }),
+};
+
+const gridVariant = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const cardVariant = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const Clubs = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -14,31 +45,32 @@ const Clubs = () => {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [category, setCategory] = useState("");
   const [sortOption, setSortOption] = useState("newest");
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // debounce search input
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(search), 400);
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+      setCurrentPage(1);
+    }, 400);
     return () => clearTimeout(timer);
   }, [search]);
 
-  // Initial clubs fetch
-  const { data: initialClubs = [], isLoading } = useQuery({
-    queryKey: ["clubs", "initial"],
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: [
+      "clubs",
+      debouncedSearch,
+      category,
+      sortOption,
+      currentPage,
+    ],
     queryFn: async () => {
-      const res = await axiosSecure.get("/clubs/approved");
-      return res.data;
-    },
-  });
-
-  // Filtered + Sorted clubs
-  const { data: filteredClubs = [], isFetching } = useQuery({
-    queryKey: ["filterclubs", debouncedSearch, category, sortOption],
-    queryFn: async () => {
-      const res = await axiosSecure.get("/club/search", {
+      const res = await axiosSecure.get("/clubs/approved", {
         params: {
           search: debouncedSearch,
           category,
           sort: sortOption,
+          page: currentPage,
+          limit: ITEMS_PER_PAGE,
         },
       });
       return res.data;
@@ -46,84 +78,104 @@ const Clubs = () => {
     keepPreviousData: true,
   });
 
-  const clubsToDisplay =
-    filteredClubs.length > 0 ? filteredClubs : initialClubs;
-
   if (isLoading) return <Loadingspinner />;
 
+  const { clubs = [], totalPages = 1 } = data || {};
+
   return (
-    <div className="p-4 max-w-7xl mx-auto">
+    <motion.div
+      variants={pageVariant}
+      initial="hidden"
+      animate="visible"
+      className="p-4 max-w-7xl mx-auto"
+    >
       {/* HEADER */}
-      <div className="flex items-center gap-3 mb-6">
+      <motion.div
+        initial={{ opacity: 0, y: -15 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center gap-3 mb-6"
+      >
         <FiTag className="text-2xl text-primary" />
         <h2 className="text-2xl font-bold">Explore Clubs</h2>
-      </div>
+      </motion.div>
 
-      {/* SEARCH + FILTER + SORT */}
+      {/* SEARCH + FILTER */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        {/* Search */}
-        <div className="relative flex-1">
+        <motion.div
+          custom={0}
+          variants={filterVariant}
+          initial="hidden"
+          animate="visible"
+          className="relative flex-1"
+        >
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
-            type="text"
-            placeholder="Search club name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search club name..."
             className="input input-bordered w-full pl-10"
           />
-        </div>
+        </motion.div>
 
-        {/* Category Filter */}
-        <select
+        <motion.select
+          custom={1}
+          variants={filterVariant}
+          initial="hidden"
+          animate="visible"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="select select-bordered w-full md:w-56"
+          className="select select-bordered md:w-52"
         >
-          <option value="">Select Category</option>
+          <option value="">All Categories</option>
           <option value="Photography">Photography</option>
           <option value="Sports">Sports</option>
           <option value="Tech">Tech</option>
-          <option value="Hiking">Hiking</option>
           <option value="Music">Music</option>
           <option value="Gaming">Gaming</option>
-        </select>
+        </motion.select>
 
-        {/* Sorting */}
-        <select
+        <motion.select
+          custom={2}
+          variants={filterVariant}
+          initial="hidden"
+          animate="visible"
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
-          className="select select-bordered w-full md:w-56"
+          className="select select-bordered md:w-52"
         >
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
           <option value="highestFee">Highest Fee</option>
           <option value="lowestFee">Lowest Fee</option>
-        </select>
+        </motion.select>
       </div>
 
       {isFetching && <Loadingspinner />}
 
-      {/* CLUBS GRID */}
-      {clubsToDisplay.length === 0 ? (
+      {/* GRID */}
+      {clubs.length === 0 ? (
         <p className="text-center text-gray-500">No clubs found.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {clubsToDisplay.map((club) => (
+        <motion.div
+          variants={gridVariant}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {clubs.map((club) => (
             <motion.div
               key={club._id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              variants={cardVariant}
               whileHover={{
                 y: -8,
                 boxShadow: "0px 15px 35px rgba(0,0,0,0.15)",
               }}
-              className="card bg-white shadow-lg rounded-2xl overflow-hidden border"
+              className="card bg-white shadow-lg rounded-2xl border"
             >
               <motion.figure
-                className="h-48 overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
+                className="h-44 overflow-hidden"
               >
                 <img
                   src={club.bannerImage}
@@ -133,44 +185,75 @@ const Clubs = () => {
               </motion.figure>
 
               <div className="card-body space-y-2">
-                <h2 className="card-title">{club.clubName}</h2>
+                <h3 className="font-bold">{club.clubName}</h3>
 
                 <p className="text-sm text-gray-600">
-                  {club.description?.slice(0, 90)}...
+                  {club.description?.slice(0, 80)}...
                 </p>
 
                 <div className="flex justify-between text-sm">
                   <span className="flex items-center gap-1">
                     <FiMapPin /> {club.location}
                   </span>
-                  <span className="flex items-center gap-1 font-semibold">
-                    <FiDollarSign />{" "}
+                  <span className="flex items-center gap-1">
+                    <FiDollarSign />
                     {club.membershipFee === 0
                       ? "Free"
                       : `$${club.membershipFee}`}
                   </span>
                 </div>
 
-                <span className="badge bg-orange-600 text-white w-fit">
-                  {club.category}
-                </span>
-
-                <div className="card-actions justify-end">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => navigate(`/clubs/${club._id}`)}
-                    className="btn btn-outline btn-primary btn-sm rounded-xl"
-                  >
-                    View Details
-                  </motion.button>
-                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate(`/clubs/${club._id}`)}
+                  className="btn btn-outline btn-primary btn-sm rounded-xl"
+                >
+                  View Details
+                </motion.button>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
-    </div>
+
+      {/* PAGINATION */}
+      {totalPages > 1 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex justify-center gap-2 mt-10"
+        >
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((p) => p - 1)}
+            className="btn btn-sm"
+          >
+            Prev
+          </button>
+
+          {[...Array(totalPages).keys()].map((i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`btn btn-sm ${
+                currentPage === i + 1 ? "btn-primary" : "btn-outline"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((p) => p + 1)}
+            className="btn btn-sm"
+          >
+            Next
+          </button>
+        </motion.div>
+      )}
+    </motion.div>
   );
 };
 
