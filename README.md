@@ -239,9 +239,15 @@ Email: manager100@gmail.com
 
 Password: Manager@11234
 
+🧑‍💻 User
+
+Email: user1000@gmail.com
+
+Password: User@11234
+
 🔗 Live Project & Source Code
 
-🌐 Live Site: https://musical-flan-487309.netlify.app/
+🌐 Live Site: https://profound-pixie-0f79f1.netlify.app/
 
 🖥 Server Repo: https://github.com/akib2012/ClubSphere_server_side.git
 
@@ -250,3 +256,5 @@ Password: Manager@11234
 👨‍💻 Developed by
 
 MD Perbej Bhuiyan Akib 🚀
+
+© All Rights Reserved

@@ -41,7 +41,7 @@ const Login = () => {
       setValue("email", "manager100@gmail.com");
       setValue("password", "Manager@11234");
     } else if (type === "user") {
-      setValue("email", "user1001@gmail.com");
+      setValue("email", "user1000@gmail.com");
       setValue("password", "User@11234");
     }
   };
